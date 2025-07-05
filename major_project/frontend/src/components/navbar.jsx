@@ -9,19 +9,27 @@ const Navbar = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Asana", path: "/asanas" },
+    { name: "Recommendations", path: "/form" },
+    { name: "Team", path: "/team" },
+  ];
+
   return (
     <nav className="sticky top-0 z-50 backdrop-blur bg-white/90 shadow-md py-4 w-full">
       <div className="w-full max-w-screen-xl mx-auto px-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
-          <Link
-            to="/"
-            className="flex items-center text-primary font-bold text-3xl"
-          >
-            <img src={logo} alt="AtmaYoga Logo" className="h-10 w-auto" />
-            <span className="ml-2 text-[#7e57c2]">AtmaYoga</span>
-          </Link>
-        </div>
+        {/* Logo */}
+        <Link
+          to="/"
+          className="flex items-center text-primary font-bold text-3xl"
+        >
+          <img src={logo} alt="AtmaYoga Logo" className="h-10 w-auto" />
+          <span className="ml-2 text-[#7e57c2]">AtmaYoga</span>
+        </Link>
 
+        {/* Toggle Button */}
         <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
           {isOpen ? (
             <X className="w-7 h-7 text-gray-700" />
@@ -30,78 +38,47 @@ const Navbar = () => {
           )}
         </div>
 
-        <ul
-          className={`md:flex items-center space-y-4 md:space-y-0 md:space-x-8 absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent px-6 md:px-0 py-4 md:py-0 transition-all duration-300 ease-in-out ${
-            isOpen ? "block" : "hidden md:flex"
-          }`}
-        >
-          <li className="flex items-center">
-            <Link
-              to="/"
-              className="relative font-medium text-gray-800 leading-normal
-  after:content-[''] after:absolute after:bottom-0 after:left-0 after:translate-y-[4px]
-  after:w-full after:h-[2px] after:scale-x-0 after:origin-center
-  after:bg-[#7e57c2] after:transition-transform after:duration-300
-  hover:after:scale-x-100"
-            >
-              Home
-            </Link>
-          </li>
-          <li className="flex items-center">
-            <Link
-              to="/"
-              className="relative font-medium text-gray-800 leading-normal
-  after:content-[''] after:absolute after:bottom-0 after:left-0 after:translate-y-[4px]
-  after:w-full after:h-[2px] after:scale-x-0 after:origin-center
-  after:bg-[#7e57c2] after:transition-transform after:duration-300
-  hover:after:scale-x-100"
-            >
-              About
-            </Link>
-          </li>
-          <li className="flex items-center">
-            <Link
-              to="/"
-              className="relative font-medium text-gray-800 leading-normal
-  after:content-[''] after:absolute after:bottom-0 after:left-0 after:translate-y-[4px]
-  after:w-full after:h-[2px] after:scale-x-0 after:origin-center
-  after:bg-[#7e57c2] after:transition-transform after:duration-300
-  hover:after:scale-x-100"
-            >
-              Asana
-            </Link>
-          </li>
-          <li className="flex items-center">
-            <Link
-              to="/"
-              className="relative font-medium text-gray-800 leading-normal
-  after:content-[''] after:absolute after:bottom-0 after:left-0 after:translate-y-[4px]
-  after:w-full after:h-[2px] after:scale-x-0 after:origin-center
-  after:bg-[#7e57c2] after:transition-transform after:duration-300
-  hover:after:scale-x-100"
-            >
-              Recommendations
-            </Link>
-          </li>
-          <li className="flex items-center">
-            <Link
-              to="/"
-              className="relative font-medium text-gray-800 leading-normal
-  after:content-[''] after:absolute after:bottom-0 after:left-0 after:translate-y-[4px]
-  after:w-full after:h-[2px] after:scale-x-0 after:origin-center
-  after:bg-[#7e57c2] after:transition-transform after:duration-300
-  hover:after:scale-x-100"
-            >
-              Team
-            </Link>
-          </li>
+        {/* Desktop Nav */}
+        <ul className="hidden md:flex items-center space-x-8">
+          {navLinks.map(({ name, path }) => (
+            <li key={name} className="flex items-center">
+              <Link
+                to={path}
+                className="relative font-medium text-gray-800 leading-normal
+                  after:content-[''] after:absolute after:bottom-0 after:left-0 after:translate-y-[4px]
+                  after:w-full after:h-[2px] after:scale-x-0 after:origin-center
+                  after:bg-[#7e57c2] after:transition-transform after:duration-300
+                  hover:after:scale-x-100"
+              >
+                {name}
+              </Link>
+            </li>
+          ))}
 
-          <li className="hidden md:flex items-center">
+          <li className="flex items-center">
             <Button to="/login" className="hover:bg-[#4d2c91]">
               Login
             </Button>
           </li>
         </ul>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      <div
+        className={`md:hidden absolute left-0 top-full w-full z-40 bg-white px-6 flex flex-col gap-4 font-medium text-gray-800
+        transition-all duration-300 ease-in-out overflow-hidden
+        ${isOpen ? "max-h-96 py-4 shadow-lg border-b border-gray-200" : "max-h-0 py-0 border-none shadow-none"}`}
+      >
+        {navLinks.map(({ name, path }) => (
+          <Link
+            key={name}
+            to={path}
+            onClick={() => setIsOpen(false)}
+            className="relative leading-normal"
+          >
+            {name}
+          </Link>
+        ))}
       </div>
     </nav>
   );
