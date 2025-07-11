@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./Images/icn.png" type="image/icon type">
+<link rel="stylesheet" href="./Podcasts&Videos.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Bliss</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        #first-division {
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        #first-division img {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        #second-division {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e0e0e0;
+        }
+
+        #second-division img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #third-division {
+            display: flex;
+            flex-direction: column;
+            width: 700px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .rating {
+            color: orange;
+        }
+
+        #third-division .block {
+            margin-bottom: 10px;
+        }
+
+        #third-division .block a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        td {
+            display: inline-block;
+            border: 1px solid black;
+            padding: 8px;
+            margin: 4px; /* Optional: Add margin for spacing between cells */
+        }
+    </style>
+    <title>Yoga Page</title>
+</head>
+<body>
+    <div id="first-division">
+        <img src="./images/book6.png" onclick="showImage('./images/book6.png')" alt="Image 1">
+        <img src="./images/book6(1).png" onclick="showImage('./images/book6(1).png')" alt="Image 2">
+        <img src="./images/book6(2).png" onclick="showImage('./images/book6(2).png')" alt="Image 3">
+    </div>
+
+    <div id="second-division">
+        <img id="displayedImage" src="./images/book6.png" alt="Displayed Image">
+    </div>
+
+    <div id="third-division">
+        <div class="block">
+            <h3>The Yamas & Niyamas: Exploring Yoga's Ethical Practice</h3>
+            <h4>Deborah Adele</h4>
+            <div class="rating">4&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+        <div class="block">
+            <p>The first two limbs of the eight-fold path of yoga sutras—the basic text for classical yoga—are examined in this spiritual guide to the practice of yoga. Foundational to all yogic thought, they are considered to be the guidelines to the yoga way of living that free individuals to take ownership of their lives, direct them toward the fulfillment they seek, and gain the skills to choose attitude, thought, and action. The first five guidelines are referred to as the yamas— a Sanskrit word that translates to "restraints"—and encompass nonviolence, truthfulness, not stealing, nonexcess, and nonpossessiveness. The last five are referred to as the niyamas , or observances—purity, contentment, self-discipline, self-study, and surrender. A self-study section at the end of each chapter may also be used by instructors for group discussion.</p>
+            <p>Nonfiction  Spirituality  Philosophy  Self Help   Personal Development</p>
+        </div>
+        <div class="block">
+            <table>
+                <tr>
+                    <td>
+                        <p>$12.96</p>
+                        <a href="https://www.amazon.com/Yamas-Niyamas-Exploring-Ethical-Practice/dp/0974470643">Amazon</a>
+                        <p>Free Delivery&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </td>
+                    <td>
+                        <p>$8.49</p>
+                        <a href="https://goodreads.com/book/show/6845606-the-yamas-niyamas">goodreads</a>
+                        <p>Free Delivery</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showImage(imageSrc) {
+    console.log('Changing image to:', imageSrc);
+    document.getElementById('displayedImage').src = imageSrc;
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtmaYoga - Personalized Recommendations</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #fdfdfd;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f9aa33;
+        }
+
+        .form-header h1 {
+            color: #4a4a4a;
+            font-size: 2.2rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .form-header h3 {
+            color: #666;
+            font-size: 1.2rem;
+            margin: 10px 0 0;
+            font-weight: 400;
+        }
+
+        .form-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, #f9aa33, #7e57c2);
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .form-section h3 {
+            color: #7e57c2;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-section h3::before {
+            content: "✧";
+            margin-right: 12px;
+            color: #f9aa33;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+
+        .form-group:hover {
+            transform: translateX(5px);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #4a4a4a;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #f9aa33;
+            outline: none;
+            box-shadow: 0 0 10px rgba(249, 170, 51, 0.3);
+            transform: scale(1.02);
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .checkbox-item, .radio-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .checkbox-item:hover, .radio-item:hover {
+            background-color: rgba(249, 170, 51, 0.15);
+        }
+
+        .checkbox-item input, .radio-item input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .range-slider {
+            width: 100%;
+            margin-top: 12px;
+            height: 10px;
+            -webkit-appearance: none;
+            background: #e1e1e1;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #f9aa33;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .btn-submit {
+            background: #338a3e;
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 40px auto 0;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(51, 138, 62, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-submit::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.5s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(51, 138, 62, 0.4);
+        }
+
+        .btn-submit:hover::before {
+            left: 100%;
+        }
+
+        .mood-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .mood-card {
+            padding: 20px;
+            background-color: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .mood-card::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #f9aa33;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .mood-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .mood-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .mood-card.selected {
+            border-color: #f9aa33;
+            background-color: rgba(249, 170, 51, 0.15);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 12px 30px rgba(249, 170, 51, 0.2);
+        }
+
+        .mood-card i {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #7e57c2;
+            transition: all 0.3s;
+        }
+
+        .mood-card.selected i {
+            color: #f9aa33;
+            transform: scale(1.15);
+        }
+
+        .mood-card p {
+            margin: 0;
+            font-weight: 500;
+            color: #4a4a4a;
+        }
+
+        .results-container {
+            display: none;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            animation: fadeIn 0.7s;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #f9aa33;
+        }
+
+        .results-container h2 {
+            color: #4a4a4a;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(249, 170, 51, 0.1);
+            border-radius: 50%;
+            border-top-color: #f9aa33;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .asana-recommendations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 35px;
+        }
+
+        .asana-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s;
+        }
+
+        .asana-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .asana-img {
+            height: 180px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .asana-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .asana-details {
+            padding: 25px;
+        }
+
+        .asana-name {
+            font-weight: 600;
+            color: #4a4a4a;
+            margin: 0 0 15px;
+            font-size: 1.2rem;
+        }
+
+        .asana-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background-color: #e1e1e1;
+            border-radius: 6px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .progress-value {
+            height: 100%;
+            background: linear-gradient(to right, #f9aa33, #7e57c2);
+            border-radius: 6px;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background-color: #7e57c2;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-btn:hover {
+            background-color: #5e35b1;
+            transform: translateY(-2px);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .form-stepper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .form-stepper::before {
+            content: "";
+            position: absolute;
+            top: 18px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #e1e1e1;
+            z-index: 1;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #f1f1f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            border: 3px solid #e1e1e1;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .step-circle.active {
+            background-color: #f9aa33;
+            border-color: #f9aa33;
+            color: white;
+        }
+
+        .step-circle.completed {
+            background-color: #338a3e;
+            border-color: #338a3e;
+            color: white;
+        }
+
+        .step-title {
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
+
+        .step-title.active {
+            color: #f9aa33;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 25px;
+                margin: 20px;
+            }
+
+            .mood-selector {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+
+            .asana-recommendations {
+                grid-template-columns: 1fr;
+            }
+
+            .form-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            color: #338a3e;
+            font-weight: 600;
+            margin-top: 20px;
+            animation: successPulse 1.5s infinite;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+   <!-- Navigation -->
+   <nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="./images/icon.png" alt="AtmaYoga Logo" style="height: 40px; width: auto;">
+                AtmaYoga</a>
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" >About</a></li>
+            <li><a href="asanas.html">Asanas</a></li>
+            <li><a href="form.html" class="active">Recommendations</a></li>
+            <li><a href="book.html">Books</a></li>
+            <li><a href="team.html">Our Team</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+        <main>
+            <div class="form-container">
+                <div class="form-header">
+                    <h1>Personalized Yoga Recommendations</h1>
+                    <h3>Find the perfect yoga asanas for your current mood and needs</h3>
+                </div>
+
+                <div class="form-stepper">
+                    <div class="step-item">
+                        <div class="step-circle active">1</div>
+                        <div class="step-title active">Mood</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-circle">2</div>
+                        <div class="step-title">Personal Info</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-circle">3</div>
+                        <div class="step-title">Lifestyle</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-circle">4</div>
+                        <div class="step-title">Health</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-circle">5</div>
+                        <div class="step-title">Sleep</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-value" style="width: 20%"></div>
+                </div>
+
+                <form id="yogaForm">
+                    <div class="form-step active" id="step1">
+                        <div class="form-section">
+                            <br>
+                            <h3><i class="fas fa-heart"></i> How are you feeling today?</h3>
+                            <p>Select the mood or emotional state that best describes how you're feeling right now:</p>
+                            <div class="mood-selector">
+                                <div class="mood-card" data-mood="Anxiety">
+                                    <i class="fas fa-wind"></i>
+                                    <p>Anxiety</p>
+                                </div>
+                                <div class="mood-card" data-mood="Boredom">
+                                    <i class="far fa-meh"></i>
+                                    <p>Boredom</p>
+                                </div>
+                                <div class="mood-card" data-mood="Restlessness">
+                                    <i class="fas fa-running"></i>
+                                    <p>Restlessness</p>
+                                </div>
+                                <div class="mood-card" data-mood="Low Self-Esteem">
+                                    <i class="far fa-sad-tear"></i>
+                                    <p>Low Self-Esteem</p>
+                                </div>
+                                <div class="mood-card" data-mood="Sadness">
+                                    <i class="far fa-frown"></i>
+                                    <p>Sadness</p>
+                                </div>
+                            </div>
+                            <div class="success-message" id="moodSuccess">✓ Mood selected successfully!</div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="nav-btn next" id="toStep2">Continue to Personal Info</button>
+                        </div>
+                    </div>
+
+                    <div class="form-step" id="step2">
+                        <div class="form-section">
+                            <br>
+                            <h3><i class="fas fa-user"></i> Basic Information</h3>
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" min="16" max="99" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <div class="radio-group">
+                                    <label class="radio-item">
+                                        <input type="radio" name="gender" value="male" required> Male
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="gender" value="female"> Female
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="gender" value="other"> Other
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="nav-btn" id="backToStep1">Back</button>
+                            <button type="button" class="nav-btn next" id="toStep3">Continue to Lifestyle</button>
+                        </div>
+                    </div>
+
+                    <div class="form-step" id="step3">
+                        <div class="form-section">
+                            <br>
+                            <h3><i class="fas fa-heartbeat"></i> Body Measurements and Lifestyle</h3>
+                            <div class="form-group">
+                                <label for="bmi">BMI (Weight (kg) / [Height (m)]²)</label>
+                                <input type="number" id="bmi" name="bmi" step="0.01" min="10" max="50">
+                            </div>
+                            <div class="form-group">
+                                <label>Do you currently practice yoga?</label>
+                                <div class="radio-group">
+                                    <label class="radio-item">
+                                        <input type="radio" name="yogaPractice" value="yes"> Yes
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="yogaPractice" value="no"> No
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="yogaDetails" style="display: none;">
+                                <div class="form-group">
+                                    <label for="yogaStyle">What style/type of yoga do you practice?</label>
+                                    <input type="text" id="yogaStyle" name="yogaStyle">
+                                </div>
+                                <div class="form-group">
+                                    <label for="yogaFrequency">How often do you practice?</label>
+                                    <select id="yogaFrequency" name="yogaFrequency">
+                                        <option value="">Select frequency</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="several_times_week">Several times a week</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="occasionally">Occasionally</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>What is your skill level?</label>
+                                    <div class="radio-group">
+                                        <label class="radio-item">
+                                            <input type="radio" name="skillLevel" value="beginner"> Beginner
+                                        </label>
+                                        <label class="radio-item">
+                                            <input type="radio" name="skillLevel" value="intermediate"> Intermediate
+                                        </label>
+                                        <label class="radio-item">
+                                            <input type="radio" name="skillLevel" value="advanced"> Advanced
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="activityLevel">On a scale of 1-10, how physically active is your lifestyle?</label>
+                                <input type="range" id="activityLevel" name="activityLevel" min="1" max="10" value="5" class="range-slider">
+                                <div class="range-labels">
+                                    <span>1 (Least active)</span>
+                                    <span id="activityValue">5</span>
+                                    <span>10 (Most active)</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="stressLevel">On a scale of 1-10, how stressful is your life or job currently?</label>
+                                <input type="range" id="stressLevel" name="stressLevel" min="1" max="10" value="5" class="range-slider">
+                                <div class="range-labels">
+                                    <span>1 (Least stressful)</span>
+                                    <span id="stressValue">5</span>
+                                    <span>10 (Most stressful)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="nav-btn" id="backToStep2">Back</button>
+                            <button type="button" class="nav-btn next" id="toStep4">Continue to Health Info</button>
+                        </div>
+                    </div>
+
+                    <div class="form-step" id="step4">
+                        <div class="form-section">
+                            <br>
+                            <h3><i class="fas fa-medkit"></i> Health Information</h3>
+                            <div class="form-group">
+                                <label>Do you suffer from any of the following health issues?</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="arthritis"> Arthritis
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="asthma"> Asthma
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="high_blood_pressure"> High blood pressure
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="low_blood_pressure"> Low blood pressure
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="diabetes"> Diabetes
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="back_pain"> Back pain/problems
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="knee_pain"> Knee pain/problems
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="neck_pain"> Neck pain/problems
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="anxiety"> Anxiety
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" name="healthIssues" value="depression"> Depression
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="nav-btn" id="backToStep3">Back</button>
+                            <button type="button" class="nav-btn next" id="toStep5">Continue to Sleep Info</button>
+                        </div>
+                    </div>
+
+                    <div class="form-step" id="step5">
+                        <div class="form-section">
+                            <h3><i class="fas fa-moon"></i> Sleep and Lifestyle Habits</h3>
+                            <div class="form-group">
+                                <label for="sleepHours">How many hours do you sleep per night?</label>
+                                <input type="number" id="sleepHours" name="sleepHours" min="1" max="12" step="0.5">
+                            </div>
+                            <div class="form-group">
+                                <label>Do you feel energetic throughout the day?</label>
+                                <div class="radio-group">
+                                    <label class="radio-item">
+                                        <input type="radio" name="energetic" value="yes"> Yes, most days
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="energetic" value="sometimes"> Sometimes
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="energetic" value="no"> No, rarely
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sleepQuality">How would you rate your sleep quality?</label>
+                                <input type="range" id="sleepQuality" name="sleepQuality" min="1" max="10" value="5" class="range-slider">
+                                <div class="range-labels">
+                                    <span>1 (Poor)</span>
+                                    <span id="sleepValue">5</span>
+                                    <span>10 (Excellent)</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Do you have trouble falling asleep?</label>
+                                <div class="radio-group">
+                                    <label class="radio-item">
+                                        <input type="radio" name="fallAsleep" value="yes"> Yes, often
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="fallAsleep" value="sometimes"> Sometimes
+                                    </label>
+                                    <label class="radio-item">
+                                        <input type="radio" name="fallAsleep" value="no"> No, rarely
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Any additional comments about your sleep or daily routine?</label>
+                                <textarea id="sleepComments" name="sleepComments" rows="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-navigation">
+                            <button type="button" class="nav-btn" id="backToStep4">Back</button>
+                            <button type="submit" class="btn-submit">Get Personalized Recommendations</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="loading" id="loadingSection">
+                    <div class="spinner"></div>
+                    <p>Analyzing your information and preparing personalized recommendations...</p>
+                </div>
+
+                <div class="results-container" id="resultsSection">
+                    <h2>Your Personalized Yoga Recommendations</h2>
+                    <p class="results-intro">Based on your current mood and personal information, we recommend these yoga practices to help you feel better:</p>
+                    <div class="asana-recommendations">
+                        <!-- Asana cards will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3>AtmaYoga</h3>
+                        <p>Find your inner balance through personalized yoga practices.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="asanas.html">Asanas</a></li>
+                            <li><a href="form.html">Get Recommendations</a></li>
+                            <li><a href="team.html">Our Team</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Yoga for Beginners</a></li>
+                            <li><a href="#">Meditation Guides</a></li>
+                            <li><a href="#">Breathing Techniques</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Contact Us</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Amrita Vishwa Vidyapeetam</p>
+                        <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                        <p><i class="fas fa-envelope"></i> info@atmayoga.com</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2025 AtmaYoga. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const steps = document.querySelectorAll('.form-step');
+            const stepCircles = document.querySelectorAll('.step-circle');
+            const stepTitles = document.querySelectorAll('.step-title');
+            const progressBar = document.querySelector('.progress-value');
+            const moodCards = document.querySelectorAll('.mood-card');
+            const activitySlider = document.getElementById('activityLevel');
+            const activityValue = document.getElementById('activityValue');
+            const stressSlider = document.getElementById('stressLevel');
+            const stressValue = document.getElementById('stressValue');
+            const sleepSlider = document.getElementById('sleepQuality');
+            const sleepValue = document.getElementById('sleepValue');
+            const yogaPracticeRadios = document.querySelectorAll('input[name="yogaPractice"]');
+            const yogaDetailsSection = document.getElementById('yogaDetails');
+            const moodSuccess = document.getElementById('moodSuccess');
+
+            const toStep2 = document.getElementById('toStep2');
+            const backToStep1 = document.getElementById('backToStep1');
+            const toStep3 = document.getElementById('toStep3');
+            const backToStep2 = document.getElementById('backToStep2');
+            const toStep4 = document.getElementById('toStep4');
+            const backToStep3 = document.getElementById('backToStep3');
+            const toStep5 = document.getElementById('toStep5');
+            const backToStep4 = document.getElementById('backToStep4');
+            
+            const yogaForm = document.getElementById('yogaForm');
+            const loadingSection = document.getElementById('loadingSection');
+            const resultsSection = document.getElementById('resultsSection');
+
+            function goToStep(currentStep, nextStep) {
+                steps[currentStep - 1].classList.remove('active');
+                steps[nextStep - 1].classList.add('active');
+                
+                stepCircles.forEach((circle, index) => {
+                    circle.classList.remove('active');
+                    stepTitles[index].classList.remove('active');
+                    
+                    if (index + 1 < nextStep) {
+                        circle.classList.add('completed');
+                        circle.innerHTML = '<i class="fas fa-check"></i>';
+                    } else if (index + 1 === nextStep) {
+                        circle.classList.add('active');
+                        stepTitles[index].classList.add('active');
+                    } else {
+                        circle.classList.remove('completed');
+                        circle.innerHTML = index + 1;
+                    }
+                });
+                
+                progressBar.style.width = `${nextStep * 20}%`;
+            }
+
+            toStep2.addEventListener('click', () => {
+                const selectedMood = document.querySelector('.mood-card.selected');
+                if (!selectedMood) {
+                    alert('Please select your current mood');
+                    return;
+                }
+                goToStep(1, 2);
+            });
+            
+            backToStep1.addEventListener('click', () => goToStep(2, 1));
+            toStep3.addEventListener('click', () => goToStep(2, 3));
+            backToStep2.addEventListener('click', () => goToStep(3, 2));
+            toStep4.addEventListener('click', () => goToStep(3, 4));
+            backToStep3.addEventListener('click', () => goToStep(4, 3));
+            toStep5.addEventListener('click', () => goToStep(4, 5));
+            backToStep4.addEventListener('click', () => goToStep(5, 4));
+
+            moodCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    moodCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    moodSuccess.style.display = 'block';
+                    setTimeout(() => {
+                        moodSuccess.style.display = 'none';
+                    }, 2000);
+                });
+            });
+
+            activitySlider.addEventListener('input', function() {
+                activityValue.textContent = this.value;
+            });
+            
+            stressSlider.addEventListener('input', function() {
+                stressValue.textContent = this.value;
+            });
+            
+            sleepSlider.addEventListener('input', function() {
+                sleepValue.textContent = this.value;
+            });
+
+            yogaPracticeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        yogaDetailsSection.style.display = 'block';
+                    } else {
+                        yogaDetailsSection.style.display = 'none';
+                    }
+                });
+            });
+
+            yogaForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                loadingSection.style.display = 'block';
+                
+                setTimeout(() => {
+                    loadingSection.style.display = 'none';
+                    resultsSection.style.display = 'block';
+                    
+                    const selectedMood = document.querySelector('.mood-card.selected').getAttribute('data-mood');
+                    const asanaRecommendations = document.querySelector('.asana-recommendations');
+                    asanaRecommendations.innerHTML = '';
+                    
+                    const recommendationsData = getRecommendationsForMood(selectedMood);
+                    recommendationsData.forEach(asana => {
+                        const asanaCard = createAsanaCard(asana);
+                        asanaRecommendations.appendChild(asanaCard);
+                    });
+                    
+                    const progressBars = document.querySelectorAll('.progress-value');
+                    progressBars.forEach(bar => {
+                        const targetWidth = bar.getAttribute('data-value');
+                        setTimeout(() => {
+                            bar.style.width = `${targetWidth}%`;
+                        }, 300);
+                    });
+                    
+                    resultsSection.scrollIntoView({ behavior: 'smooth' });
+                }, 2000);
+            });
+
+            function createAsanaCard(asana) {
+                const card = document.createElement('div');
+                card.className = 'asana-card';
+                card.innerHTML = `
+                    <div class="asana-img">
+                        <img src="${asana.image}" alt="${asana.name}">
+                    </div>
+                    <div class="asana-details">
+                        <h3 class="asana-name">${asana.name}</h3>
+                        <p class="asana-description">${asana.description}</p>
+                        <div class="progress-bar">
+                            <div class="progress-value" data-value="${asana.match}"></div>
+                        </div>
+                        <p style="text-align: right; font-size: 0.9rem; margin-top: 8px;">${asana.match}% match</p>
+                    </div>
+                `;
+                return card;
+            }
+
+            function getRecommendationsForMood(mood) {
+                const recommendations = {
+                    'Anxiety': [
+                        {
+                            name: 'Corpse Pose (Savasana)',
+                            description: 'A relaxation pose that reduces stress, lowers blood pressure, and promotes deep rest.',
+                            image: 'images/savasana.jpg',
+                            match: 92
+                        },
+                        {
+                            name: 'Downward-Facing Dog (Adhomukha Svanasana)',
+                            description: 'A foundational yoga pose that stretches the entire body, strengthens the arms and legs, & improves circulation.',
+                            image: 'images/adomukhasvanasana.jpg',
+                            match: 95
+                        },
+                        {
+                            name: 'Warrior Pose (Virabhadrasana)',
+                            description: 'A powerful standing pose that strengthens the legs, opens the hips and chest, and builds focus.',
+                            image: 'images/virabadrasana1.jpg',
+                            match: 91
+                        },
+                        {
+                            name: 'Standing Forward Bend (Uttanasana)',
+                            description: 'Calms the mind, relieves stress, and gently stretches the hamstrings and back.',
+                            image: 'images/uttanasana.jpg',
+                            match: 88
+                        }
+                    ],
+                    'Boredom': [
+                        {
+                            name: 'Downward-Facing Dog (Adhomukha Svanasana)',
+                            description: 'A foundational yoga pose that stretches the entire body, strengthens the arms and legs, & improves circulation.',
+                            image: 'images/adomukhasvanasana.jpg',
+                            match: 95
+                        },
+                        {
+                            name: 'Warrior Pose (Virabhadrasana)',
+                            description: 'A powerful standing pose that strengthens the legs, opens the hips and chest, and builds focus.',
+                            image: 'images/virabadrasana1.png',
+                            match: 91
+                        },
+                        {
+                            name: 'Warrior II (Virabhadrasana II)',
+                            description: 'Builds strength, stamina, and concentration while improving body awareness.',
+                            image: 'images/virabadrasana2.jpg',
+                            match: 89
+                        },
+                        {
+                            name: 'Chair Pose(Utkatasana)',
+                            description: 'A standing pose that tones the entire body, particularly strengthening the thighs.',
+                            image: "./images/Utkatasana.jpg",
+                            match: 85
+                        }
+                    ],
+                    'Restlessness': [
+                        {
+                            name: 'Chair Pose(Utkatasana)',
+                            description: 'A standing pose that tones the entire body, particularly strengthening the thighs.',
+                            image: "./images/Utkatasana.jpg",
+                            match: 85
+                        },
+                        {
+                            name: 'Easy Pose (Sukhasana) with meditation',
+                            description: 'A comfortable seated pose for meditation to calm the mind and nervous system.',
+                            image: 'images/sukhasana.jpg',
+                            match: 90
+                        },
+                        {
+                            name: 'Standing Forward Bend (Uttanasana)',
+                            description: 'Relieves anxiety and fatigue while calming an overactive mind.',
+                            image: 'images/uttanasana.jpg',
+                            match: 87
+                        }
+                    ],
+                    'Low Self-Esteem': [
+                        {
+                            name: 'Mountain Pose (Tadasana)',
+                            description: 'Improves posture, balance, and confidence through proper alignment.',
+                            image: 'images/Tadasana.jpg',
+                            match: 93
+                        },
+                        {
+                            name: 'Warrior I (Virabhadrasana I)',
+                            description: 'Builds strength, focus, and confidence while opening the chest and heart.',
+                            image: 'images/virabadrasana1.jpg',
+                            match: 91
+                        },
+                        {
+                            name: 'Upward Plank Pose(Purvottanasana)',
+                            description: 'Improves balance, concentration, and mental clarity while building confidence.',
+                            image: './images/purvatanasana.jpg',
+                            match: 88
+                        }
+                    ],
+                    'Sadness': [
+                        {
+                            name: 'Downward-Facing Dog (Adhomukha Svanasana)',
+                            description: 'A foundational yoga pose that stretches the entire body, strengthens the arms and legs, & improves circulation.',
+                            image: 'images/adomukhasvanasana.jpg',
+                            match: 95
+                        },
+                        {
+                            name: 'Chair Pose(Utkatasana)',
+                            description: 'A standing pose that tones the entire body, particularly strengthening the thighs.',
+                            image: "./images/Utkatasana.jpg",
+                            match: 85
+                        },
+                        {
+                            name: 'Mountain Pose (Tadasana)',
+                            description: 'Improves posture, balance, and confidence through proper alignment.',
+                            image: 'images/Tadasana.jpg',
+                            match: 93
+                        }
+                    ]
+                };
+                return recommendations[mood] || recommendations['Anxiety'];
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./Images/icn.png" type="image/icon type">
+<link rel="stylesheet" href="./Podcasts&Videos.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Bliss</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        #first-division {
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        #first-division img {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        #second-division {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e0e0e0;
+        }
+
+        #second-division img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #third-division {
+            display: flex;
+            flex-direction: column;
+            width: 700px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .rating {
+            color: orange;
+        }
+
+        #third-division .block {
+            margin-bottom: 10px;
+        }
+
+        #third-division .block a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        td {
+            display: inline-block;
+            border: 1px solid black;
+            padding: 8px;
+            margin: 4px; /* Optional: Add margin for spacing between cells */
+        }
+    </style>
+    <title>Yoga Page</title>
+</head>
+<body>
+    <div id="first-division">
+        <img src="./images/book3.png" onclick="showImage('./images/book3.png')" alt="Image 1">
+        <img src="./images/book3(1).png" onclick="showImage('./images/book3(1).png')" alt="Image 2">
+        <img src="./images/book3(2).png" onclick="showImage('./images/book3(2).png')" alt="Image 3">
+    </div>
+
+    <div id="second-division">
+        <img id="displayedImage" src="./images/book3.png" alt="Displayed Image">
+    </div>
+
+    <div id="third-division">
+        <div class="block">
+            <h3>Light on Yoga</h3>
+            <h4>B.K.S. Iyengar,yehudi Menuhim (Foreward)</h4>
+            <div class="rating">4&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+        <div class="block">
+            <p>Light on Yoga has become the bible for hundreds of thousands of people who practice Yoga daily with the Iyengar method, for exercise, meditation, or simply relaxation. With more than 600 photographs depicting all the postures and breathing exercises, it remains the fullest, most practical, and most profusely illustrated guide by the world's foremost yoga teacher. Light on Yoga is a comprehensive and definitive source-book for the initiated, as well as the best introduction for the novice who seeks the healthful benefits of Yoga for mind, body, and soul.</p>
+            <p>Nonfiction Health Spirituality Reference Philosophy Self Help Fitness</p>
+        </div>
+        <div class="block">
+            <table>
+                <tr>
+                    <td>
+                        <p>399.00/-</p>
+                        <a href="https://www.flipkart.com/illustrated-light-yoga/p/itmeenedygnqkcam">Flipkart</a>
+                        <p>Free Delivery&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </td>
+                    <td>
+                        <p>599.00/-</p>
+                        <a href="https://www.amazon.in/s?k=light+on+the+yoga&adgrpid=1317216536569380&hvadid=82326291867596&hvbmt=bp&hvdev=c&hvlocphy=149915&hvnetw=o&hvqmt=p&hvtargid=kwd-82326913126361%3Aloc-90&hydadcr=13059_1940016&tag=msndeskstdin-21&ref=pd_sl_8ownbqjxau_p">Amazon</a>
+                        <p>Free Delivery&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showImage(imageSrc) {
+    console.log('Changing image to:', imageSrc);
+    document.getElementById('displayedImage').src = imageSrc;
+}
+
+    </script>
+</body>
+</html>

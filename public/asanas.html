@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtmaYoga - Asanas Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="asanas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./images/icon.png" alt="AtmaYoga Logo" style="height: 40px; width: auto;">
+                        AtmaYoga</a>
+                </div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" >Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="asanas.html" class="active">Asanas</a></li>
+                    <li><a href="form.html">Recommendations</a></li>
+                    <li><a href="book.html">Books</a></li>
+                    <li><a href="team.html">Our Team</a></li>
+                    <li><a href="login.html" class="nav-btn">Login / Signup</a></li>
+                </ul>
+            </div>
+        </nav>
+
+    <main>
+        <section class="hero-banner">
+            <div class="hero-content">
+                <h1>Yoga Asanas Library</h1>
+                <p>Explore our comprehensive collection of yoga poses and their benefits</p>
+            </div>
+        </section>
+
+        <div class="asanas-container">
+            <div class="search-filter">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="asanaSearch" placeholder="Search asanas...">
+                </div>
+                <div class="category-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="standing">Standing</button>
+                    <button class="filter-btn" data-filter="seated">Seated</button>
+                    <button class="filter-btn" data-filter="forward-bends">Forward Bends</button>
+                    <button class="filter-btn" data-filter="backbends">Backbends</button>
+                    <button class="filter-btn" data-filter="twists">Twists</button>
+                    <button class="filter-btn" data-filter="inversions">Inversions</button>
+                    <button class="filter-btn" data-filter="restorative">Restorative</button>
+                </div>
+            </div>
+
+            <div class="asanas-grid" id="asanasGrid">
+                <!-- Asana cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>AtmaYoga</h3>
+                    <p>Find your inner balance through personalized yoga practices.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="asanas.html">Asanas</a></li>
+                        <li><a href="form.html">Get Recommendations</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Yoga for Beginners</a></li>
+                        <li><a href="#">Meditation Guides</a></li>
+                        <li><a href="#">Breathing Techniques</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Amrita Vishwa Vidyapeetam</p>
+                    <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                    <p><i class="fas fa-envelope"></i> info@atmayoga.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AtmaYoga. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        // Toggle mobile navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+        });
+
+        // Asanas data with image paths
+        const asanasData = [
+            {
+                name: "Downward-Facing Dog",
+                sanskrit: "Adhomukha Śvanāsana",
+                image: "./images/adomukhasvanasana.jpg",
+                description: "A common pose in many yoga sequences that stretches and strengthens the entire body.",
+                benefits: [
+                    "Stretches shoulders, hamstrings, calves, arches, and hands",
+                    "Strengthens arms and legs",
+                    "Calms the brain and helps relieve stress",
+                    "Energizes the body"
+                ],
+                categories: ["standing", "inversions"]
+            },
+            {
+                name: "Cobra Pose",
+                sanskrit: "Bhujangāsana",
+                image: "./images/Bhujangasana.jpg",
+                description: "A gentle backbend that opens the chest and strengthens the spine.",
+                benefits: [
+                    "Strengthens the spine",
+                    "Opens the chest and lungs",
+                    "Stimulates abdominal organs",
+                    "Improves mood and energy"
+                ],
+                categories: ["backbends"]
+            },
+            {
+                name: "Chair Pose",
+                sanskrit: "Utkaṭāsana",
+                image: "./images/Utkatasana.jpg",
+                description: "A standing pose that tones the entire body, particularly strengthening the thighs.",
+                benefits: [
+                    "Strengthens thighs, calves, and spine",
+                    "Stretches shoulders and chest",
+                    "Stimulates abdominal organs, diaphragm, and heart",
+                    "Builds heat in the body"
+                ],
+                categories: ["standing"]
+            },
+            {
+                name: "Legs-Up-The-Wall Pose",
+                sanskrit: "Viparita Karani",
+                image: "images/Viparita Karani.jpg",
+                description: "A restorative inversion that calms the nervous system and relieves tired legs.",
+                benefits: [
+                    "Relieves tired legs and feet",
+                    "Gently stretches the back of the neck, front torso, and back of legs",
+                    "Calms the mind",
+                    "Relieves mild depression and anxiety"
+                ],
+                categories: ["inversions", "restorative"]
+            },
+            {
+                name: "Warrior I",
+                sanskrit: "Vīrabhadrāsana I",
+                image: "./images/virabadrasana1.jpg",
+                description: "A standing pose that builds focus, power, and stability.",
+                benefits: [
+                    "Strengthens shoulders, arms, legs, ankles, and back",
+                    "Opens chest, lungs, and shoulders",
+                    "Improves focus and balance",
+                    "Builds confidence and power"
+                ],
+                categories: ["standing"]
+            },
+            {
+                name: "Corpse Pose",
+                sanskrit: "Śavāsana",
+                image: "./images/savasana.jpg",
+                description: "A relaxation pose typically done at the end of a practice that promotes deep rest.",
+                benefits: [
+                    "Relaxes the body",
+                    "Calms the mind and aids stress management",
+                    "Reduces headache, fatigue, and insomnia",
+                    "Helps lower blood pressure"
+                ],
+                categories: ["restorative"]
+            },
+            {
+                name: "Easy Pose",
+                sanskrit: "Sukhāsana",
+                image: "images/sukhasana.jpg",
+                description: "A simple cross-legged seated position for meditation and breathing exercises.",
+                benefits: [
+                    "Strengthens back",
+                    "Stretches knees and ankles",
+                    "Calms the mind",
+                    "Opens hips"
+                ],
+                categories: ["seated"]
+            },
+            {
+                name: "Standing Forward Bend",
+                sanskrit: "Uttānāsana",
+                image: "images/uttanasana.jpg",
+                description: "A forward bend from a standing position that stretches the back body.",
+                benefits: [
+                    "Stretches hamstrings, calves, and hips",
+                    "Strengthens thighs and knees",
+                    "Reduces stress, anxiety, depression, and fatigue",
+                    "Relieves tension in the spine, neck, and back"
+                ],
+                categories: ["standing", "forward-bends"]
+            },
+            {
+                name: "Seated Forward Bend",
+                sanskrit: "Paścimatānāsana",
+                image: "images/pascimatanasana.jpg",
+                description: "A seated forward fold that deeply stretches the back of the body.",
+                benefits: [
+                    "Stretches spine, shoulders, and hamstrings",
+                    "Calms the brain and helps relieve stress",
+                    "Stimulates liver, kidneys, and ovaries",
+                    "Improves digestion"
+                ],
+                categories: ["seated", "forward-bends"]
+            },
+            {
+                name: "Mountain Pose",
+                sanskrit: "Tāḍāsana",
+                image: "images/tadasana.jpg",
+                description: "A foundational standing pose that improves posture, balance, and body awareness.",
+                benefits: [
+                    "Improves posture",
+                    "Strengthens thighs, knees, and ankles",
+                    "Firms abdomen and buttocks",
+                    "Relieves sciatica"
+                ],
+                categories: ["standing"]
+            },
+            {
+                name: "Supported Headstand",
+                sanskrit: "Śirsāsana",
+                image: "images/Sirasasana.png",
+                description: "An inversion where the body is balanced on the forearms with the crown of the head on the floor.",
+                benefits: [
+                    "Strengthens arms, legs, and spine",
+                    "Tones abdominal organs",
+                    "Improves digestion",
+                    "Enhances concentration"
+                ],
+                categories: ["inversions"]
+            },
+            {
+                
+    name: "Boat Pose",
+    sanskrit: "Navasana",
+    image: "./images/navasana.jpg",
+    description: "A core-strengthening pose that balances the body on the sitting bones while engaging the abdominal muscles.",
+    benefits: [
+        "Strengthens the abdomen, hip flexors, and spine",
+        "Stimulates the kidneys, thyroid and intestines",
+        "Improves balance and digestion",
+        "Relieves stress and enhances concentration"
+    ],
+    categories: ["core", "balance", "seated"]
+},
+            {
+    name: "Upward Plank Pose",
+    sanskrit: "Purvottanasana",
+    image: "./images/purvatanasana.jpg",
+    description: "A powerful backbend and arm-strengthening pose that opens up the front of the body.",
+    benefits: [
+        "Strengthens the arms, wrists, legs, back, and glutes",
+        "Stretches the shoulders, chest, and front ankles",
+        "Improves posture and spinal flexibility",
+        "Energizes the body and combats fatigue"
+    ],
+    categories: ["backbends", "arm-balance", "seated"]
+}
+,
+            {
+                name: "Revolved Triangle Pose",
+                sanskrit: "Utthita Trikonasana-Parivrtti Bhedha",
+                image: "images/DSC01124( Utthita Trikoṇāsana - Parivṛtti Bheda).jpg",
+                description: "A standing twist that improves balance and stretches the hamstrings.",
+                benefits: [
+                    "Stretches and strengthens the legs",
+                    "Stretches the hips and spine",
+                    "Improves balance",
+                    "Stimulates abdominal organs"
+                ],
+                categories: ["standing", "twists"]
+            },
+            {
+    name: "Knees-to-Chest Pose",
+    sanskrit: "Apanasana",
+    image: "./images/apanasana.jpg",
+    description: "A gentle pose that massages the abdominal organs and relieves tension in the lower back.",
+    benefits: [
+        "Releases tension in the lower back and hips",
+        "Massages abdominal organs and aids digestion",
+        "Reduces bloating and gas",
+        "Calms the mind and relieves fatigue"
+    ],
+    categories: ["restorative", "supine"]
+}
+        ];
+
+        // Function to create asana cards with images
+        function createAsanaCard(asana) {
+            const imageSrc = asana.image || '/api/placeholder/400/300'; // Fallback to placeholder if no image
+
+            return `
+                <div class="asana-card" data-categories="${asana.categories.join(' ')}">
+                    <div class="asana-img">
+                        <div class="image-container">
+                            <img src="${imageSrc}" alt="${asana.name}" onerror="this.onerror=null; this.src='/api/placeholder/400/300'; this.parentElement.classList.add('fallback');">
+                            <div class="category-tags">
+                                ${asana.categories.map(cat => `<span class="category-tag">${cat}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="asana-content">
+                        <h3 class="asana-title">${asana.name}</h3>
+                        <div class="asana-sanskrit">${asana.sanskrit}</div>
+                        <p class="asana-description">${asana.description}</p>
+                        <div class="asana-benefits">
+                            <div class="benefits-title">Benefits:</div>
+                            <ul class="benefits-list">
+                                ${asana.benefits.map(benefit => `<li>${benefit}</li>`).join('')}
+                            </ul>
+                        </div>
+                    
+                    </div>
+                </div>
+            `;
+        }
+
+        // Populate asanas grid
+        const asanasGrid = document.getElementById('asanasGrid');
+        asanasData.forEach(asana => {
+            asanasGrid.innerHTML += createAsanaCard(asana);
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                // Filter asana cards with animation
+                const asanaCards = document.querySelectorAll('.asana-card');
+                
+                asanaCards.forEach(card => {
+                    card.classList.remove('animate-in');
+                    
+                    if (filter === 'all') {
+                        setTimeout(() => {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.classList.add('animate-in');
+                            }, 10);
+                        }, 300);
+                    } else {
+                        if (card.getAttribute('data-categories').includes(filter)) {
+                            setTimeout(() => {
+                                card.style.display = 'block';
+                                setTimeout(() => {
+                                    card.classList.add('animate-in');
+                                }, 10);
+                            }, 300);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('asanaSearch');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const asanaCards = document.querySelectorAll('.asana-card');
+            
+            asanaCards.forEach(card => {
+                const title = card.querySelector('.asana-title').textContent.toLowerCase();
+                const sanskrit = card.querySelector('.asana-sanskrit').textContent.toLowerCase();
+                const description = card.querySelector('.asana-description').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || sanskrit.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    card.classList.add('animate-in');
+                } else {
+                    card.style.display = 'none';
+                    card.classList.remove('animate-in');
+                }
+            });
+        });
+
+        // Animate all cards on initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            const asanaCards = document.querySelectorAll('.asana-card');
+            
+            asanaCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate-in');
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
