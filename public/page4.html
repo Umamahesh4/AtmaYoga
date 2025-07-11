@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./Images/icn.png" type="image/icon type">
+<link rel="stylesheet" href="./Podcasts&Videos.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Bliss</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        #first-division {
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        #first-division img {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        #second-division {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e0e0e0;
+        }
+
+        #second-division img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #third-division {
+            display: flex;
+            flex-direction: column;
+            width: 700px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .rating {
+            color: orange;
+        }
+
+        #third-division .block {
+            margin-bottom: 10px;
+        }
+
+        #third-division .block a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        td {
+            display: inline-block;
+            border: 1px solid black;
+            padding: 8px;
+            margin: 4px; /* Optional: Add margin for spacing between cells */
+        }
+    </style>
+    <title>Yoga Page</title>
+</head>
+<body>
+    <div id="first-division">
+        <img src="./images/book4.png" onclick="showImage('./images/book4.png')" alt="Image 1">
+        <img src="./images/book4(1).png" onclick="showImage('./images/book4(1).png')" alt="Image 2">
+        <img src="./images/book4(2).png" onclick="showImage('./images/book4(2).png')" alt="Image 3">
+    </div>
+
+    <div id="second-division">
+        <img id="displayedImage" src="./images/book4.png" alt="Displayed Image">
+    </div>
+
+    <div id="third-division">
+        <div class="block">
+            <h3>The Miracle of Mindfulness: An Introduction to the Practice of Meditation</h3>
+            <div class="rating">4&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+        <div class="block">
+<p>One of the best available introductions to the wisdom and beauty of meditation practice. --New Age Journal
+    In this beautiful and lucid guide, Zen master Thich Nhat Hanh offers gentle anecdotes and practical exercise as a means of learning the skills of mindfulness--being awake and fully aware. From washing the dishes to answering the phone to peeling an orange, he reminds us that each moment holds within it an opportunity to work toward greater self-understanding and peacefulness.</p>
+    <p>Nonfiction  Spirituality  Buddhism  Philosophy  Self Help  Religion  Psychology</p>
+        </div>
+        <div class="block">
+            <table>
+                <tr>
+                    <td>
+                        <p>499.00/-</p>
+                        <a href="https://www.amazon.in/s?k=the+miracle+of+mindfulness+by+thich+nhat+hanh&adgrpid=1312818488858256&hvadid=82051414108192&hvbmt=be&hvdev=c&hvlocphy=149915&hvnetw=o&hvqmt=e&hvtargid=kwd-82052030639111%3Aloc-90&hydadcr=2757_1938757&tag=msndeskstdin-21&ref=pd_sl_6m6l2e4ck6_e">Amazon</a>
+                        <p>Free Delivery&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </td>
+                    <td>
+                        <p>810.00/-</p>
+                        <a href="https://www.amazon.in/s?k=the+miracle+of+mindfulness+by+thich+nhat+hanh&adgrpid=1312818488858256&hvadid=82051414108192&hvbmt=be&hvdev=c&hvlocphy=149915&hvnetw=o&hvqmt=e&hvtargid=kwd-82052030639111%3Aloc-90&hydadcr=2757_1938757&tag=msndeskstdin-21&ref=pd_sl_6m6l2e4ck6_e">Amazon</a>
+                        <p>Free Delivery&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showImage(imageSrc) {
+    console.log('Changing image to:', imageSrc);
+    document.getElementById('displayedImage').src = imageSrc;
+}
+
+    </script>
+</body>
+</html>

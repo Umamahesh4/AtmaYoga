@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./Images/icn.png" type="image/icon type">
+<link rel="stylesheet" href="./Podcasts&Videos.css">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Bliss</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        #first-division {
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        #first-division img {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        #second-division {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e0e0e0;
+        }
+
+        #second-division img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        #third-division {
+            display: flex;
+            flex-direction: column;
+            width: 700px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            font-size: medium   ;
+        }
+
+        .rating {
+            color: orange;
+        }
+
+        #third-division .block {
+            margin-bottom: 10px;
+        }
+
+        #third-division .block a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        td {
+            display: inline-block;
+            border: 1px solid black;
+            padding: 8px;
+            margin: 4px; /* Optional: Add margin for spacing between cells */
+        }
+    </style>
+    <title>Yoga Page</title>
+</head>
+<body>
+    <div id="first-division">
+        <img src="./images/book1.png" onclick="showImage('./images/book1.png')" alt="Image 1">
+        <img src="./images/book1(1).png" onclick="showImage('./images/book1(1).png')" alt="Image 2">
+        <img src="./images/book1(2).png" onclick="showImage('./images/book1(2).png')" alt="Image 3">
+    </div>
+
+    <div id="second-division">
+        <img id="displayedImage" src="./images/book1.png" alt="Displayed Image">
+    </div>
+
+    <div id="third-division">
+        <div class="block">
+            <h3>The Yoga Sutras Of Patanjali</h3>
+            <div class="rating">4&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+        </div>
+        <div class="block">
+            <p>'The Yoga Sutras of Patanjali' provides a complete manual for the study and practice of Raja Yoga, the path of concentration and meditation. The sutras begin with the most basic...</p>
+            <p>Hardback</p>
+        </div>
+        <div class="block">
+            <table>
+                <tr>
+                    <td>
+                        <p>1,099.00/-</p>
+                        <a href="https://www.flipkart.com/yoga-sutras-patanjali/p/itme9ybyuhtrhhm5?pid=9781938477072&lid=LSTBOK9781938477072VXDKPV&marketplace=FLIPKART&cmpid=content_book_8965229628_gmc">Flipkart</a>
+                        <p>Free Delivery&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </td>
+                    <td>
+                        <p>810.00/-</p>
+                        <a href="https://arcus-www.amazon.in/Yoga-Sutras-Patanjali-Swami-Satchidananda/dp/1938477073/ref=tmm_pap_swatch_0?_encoding=UTF8&qid=&sr=">Amazon</a>
+                        <p>Free Delivery&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                    </td>
+                    <td>
+                        <p>1,206.00/-</p>
+                        <a href="https://www.bookswagon.com/book/yoga-sutras-patanjali-sri-swami/9781938477072">Bookswagon.com</a>
+                        <p>Free Delivery</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function showImage(imageSrc) {
+    console.log('Changing image to:', imageSrc);
+    document.getElementById('displayedImage').src = imageSrc;
+}
+
+    </script>
+</body>
+</html>

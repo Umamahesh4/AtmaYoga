@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AtmaYoga - Our Team</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Additional styles for the team page */
+        .team-container {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f9f7ff 0%, #f5f0ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .team-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237d5fff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        
+        .sacred-geometry {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ccircle cx='150' cy='150' r='140' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3Ccircle cx='150' cy='150' r='120' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3Ccircle cx='150' cy='150' r='100' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3Ccircle cx='150' cy='150' r='80' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3Ccircle cx='150' cy='150' r='60' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.4;
+            z-index: 0;
+        }
+        
+        .sacred-geometry-1 {
+            top: -150px;
+            left: -150px;
+        }
+        
+        .sacred-geometry-2 {
+            bottom: -150px;
+            right: -150px;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .team-section-header {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+        
+        .team-section-header h2 {
+            font-size: 2.8rem;
+            color: #3a3a3a;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .team-section-header h2::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #7d5fff, #9d86ff);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .team-section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 20px auto 0;
+            line-height: 1.7;
+        }
+        
+        .team-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+        
+        .category-tab {
+            padding: 12px 28px;
+            margin: 0 10px;
+            background-color: #fff;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .category-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #7d5fff, #9d86ff);
+            transition: all 0.4s ease;
+            z-index: -1;
+            border-radius: 30px;
+        }
+        
+        .category-tab:hover::before {
+            width: 100%;
+        }
+        
+        .category-tab:hover {
+            color: white;
+        }
+        
+        .category-tab.active {
+            background: linear-gradient(90deg, #7d5fff, #9d86ff);
+            color: white;
+            box-shadow: 0 5px 15px rgba(125, 95, 255, 0.4);
+        }
+        
+        /* Faculty section */
+        .team-section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            position: relative;
+            padding-left: 15px;
+            color: #333;
+        }
+        
+        .section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10%;
+            height: 80%;
+            width: 5px;
+            background: linear-gradient(180deg, #7d5fff, #9d86ff);
+            border-radius: 3px;
+        }
+        
+        .faculty-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        
+        .students-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        
+        @media (max-width: 992px) {
+            .faculty-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .students-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .students-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .team-member {
+            position: relative;
+            background-color: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            z-index: 1;
+        }
+        
+        .team-member::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #7d5fff, #9d86ff);
+            z-index: 2;
+        }
+        
+        .faculty-member::before {
+            background: linear-gradient(90deg, #ff7d7d, #ffb17d);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .team-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+        }
+        
+        .team-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .team-member:hover .team-img {
+            transform: scale(1.08);
+        }
+        
+        .member-category {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .faculty-tag {
+            background: linear-gradient(90deg, #ff7d7d, #ffb17d);
+            color: white;
+        }
+        
+        .student-tag {
+            background: linear-gradient(90deg, #7d5fff, #9d86ff);
+            color: white;
+        }
+        
+        .social-icons {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent);
+            padding: 30px 15px 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .team-member:hover .social-icons {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 6px;
+            color: #333;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            transform: translateY(10px);
+            opacity: 0;
+        }
+        
+        .team-member:hover .social-icons a {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .team-member:hover .social-icons a:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        
+        .team-member:hover .social-icons a:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        
+        .team-member:hover .social-icons a:nth-child(3) {
+            transition-delay: 0.3s;
+        }
+        
+        .team-member:hover .social-icons a:nth-child(4) {
+            transition-delay: 0.4s;
+        }
+        
+        .social-icons a:hover {
+            transform: translateY(-5px) scale(1.1) !important;
+        }
+        
+        .faculty-member .social-icons a:hover {
+            background: linear-gradient(90deg, #ff7d7d, #ffb17d);
+            color: white;
+        }
+        
+        .student-member .social-icons a:hover {
+            background: linear-gradient(90deg, #7d5fff, #9d86ff);
+            color: white;
+        }
+        
+        .team-info {
+            padding: 30px 25px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .team-info::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #eaeaea;
+            border-radius: 3px;
+        }
+        
+        .team-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #333;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .position {
+            font-weight: 600;
+            margin-bottom: 18px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .faculty-member .position {
+            color: #ff7d7d;
+        }
+        
+        .student-member .position {
+            color: #7d5fff;
+        }
+        
+        .bio {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .faculty-member .expertise-tag {
+            background-color: #fff0ec;
+            color: #ff7d7d;
+        }
+        
+        .student-member .expertise-tag {
+            background-color: #f0ecff;
+            color: #7d5fff;
+        }
+        
+        .expertise-tag {
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .expertise-tag:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Om symbol animation */
+        .om-animation {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%237d5fff' fill-opacity='0.1' d='M291.5 165c-22.4 0-42.4 10.4-55.5 26.8-13.1-16.4-33.1-26.8-55.5-26.8-39.6 0-71.5 32-71.5 71.5 0 49.4 44.9 94.3 115.5 158.4l11.5 10.4 11.5-10.4c70.6-64.1 115.5-109 115.5-158.4 0-39.6-32-71.5-71.5-71.5zm-55.5 205.9c-59.6-54.2-99.5-90.8-99.5-134.4 0-24.5 19.9-44.5 44.5-44.5 19.6 0 36.3 12.7 42.3 30.3h25.3c6-17.6 22.7-30.3 42.3-30.3 24.5 0 44.5 19.9 44.5 44.5.1 43.6-39.8 80.2-99.4 134.4z'/%3E%3C/svg%3E");
+            animation: floatAnimation 10s infinite ease-in-out;
+            opacity: 0.6;
+        }
+        
+        .om-1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .om-2 {
+            top: 30%;
+            right: 8%;
+            animation-delay: 2s;
+        }
+        
+        .om-3 {
+            bottom: 15%;
+            left: 12%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes floatAnimation {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="page-wrapper">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./images/icon.png" alt="AtmaYoga Logo" style="height: 40px; width: auto;">
+                        AtmaYoga</a>
+                </div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" >Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="asanas.html">Asanas</a></li>
+                    <li><a href="form.html">Recommendations</a></li>
+                    <li><a href="team.html" class="active">Our Team</a></li>
+                    <li><a href="login.html" class="nav-btn">Login / Signup</a></li>
+                </ul>
+            </div>
+        </nav>
+    
+        <section class="page-banner">
+            <div class="container">
+                <h2>Meet Our Team</h2>
+                <p>The dedicated minds behind AtmaYoga</p>
+            </div>
+        </section>
+
+        <section class="team-container">
+            <!-- Decorative elements -->
+            <div class="sacred-geometry sacred-geometry-1"></div>
+            <div class="sacred-geometry sacred-geometry-2"></div>
+            <div class="om-animation om-1"></div>
+            <div class="om-animation om-2"></div>
+            <div class="om-animation om-3"></div>
+            
+            <div class="container">
+                <div class="team-section-header">
+                    <h2>Our Inspiring Team</h2>
+                    <p>A harmonious blend of experienced faculty and talented students coming together to create an immersive yoga experience that nurtures mind, body, and spirit.</p>
+                </div>
+                
+                <div class="team-categories">
+                    <div class="category-tab active" data-category="all">All Members</div>
+                    <div class="category-tab" data-category="faculty">Faculty</div>
+                    <div class="category-tab" data-category="student">Students</div>
+                </div>
+                
+                <!-- All Members View -->
+                <div id="all-view">
+                    <!-- Faculty Section -->
+                    <div class="team-section">
+                        <h3 class="section-title">Our Faculty</h3>
+                        <div class="faculty-row">
+                            <!-- Faculty Member 1 -->
+                            <div class="team-member faculty-member">
+                                <div class="team-img-wrapper">
+                                    <img src="images/team1.png" alt="Yoga Instructor" class="team-img">
+                                    <div class="member-category faculty-tag">Faculty</div>
+                                    <div class="social-icons">
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-info">
+                                    <h3>T.Senthil Kumar Sir</h3>
+                                    <p class="position"> Project Lead </p>
+                                    <p class="bio">Professor, Scholl of Computing, Coimbatore</p>
+                                    <div class="expertise-tags">
+                                        <span class="expertise-tag">t_senthilkumar@cb.amrita.edu</span>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Faculty Member 2 -->
+                            <div class="team-member faculty-member">
+                                <div class="team-img-wrapper">
+                                    <img src="images/team2.jpg" alt="Wellness Expert" class="team-img">
+                                    <div class="member-category faculty-tag">Faculty</div>
+                                    <div class="social-icons">
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                        <a href="#"><i class="fab fa-instagram"></i></a>
+                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-info">
+                                    <h3>B.Senthil Kumar Sir</h3>
+                                    <p class="position">Yoga Instructor</p>
+                                    <p class="bio">Assistant Professor, Spiritual Studies</p>
+                                    <div class="expertise-tags">
+                                        <span class="expertise-tag">b_senthilkumar@cb.amrita.edu</span>
+                           
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Students Section -->
+                    <div class="team-section">
+                        <h3 class="section-title">Our Students</h3>
+                        <div class="students-row">
+                            <!-- Student 1 -->
+                            <div class="team-member student-member">
+                                <div class="team-img-wrapper">
+                                    <img src="" alt="Developer" class="team-img">
+                                    <div class="member-category student-tag">Student</div>
+                                    <div class="social-icons">
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                        <a href="#"><i class="fab fa-github"></i></a>
+                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-info">
+                                    <h3>K.Bhavya Naga Sai</h3>
+                                    <p class="position">Lead Developer & Dataset</p>
+                                    <p class="bio">Bhavya combines his passion for yoga with technical expertise to create intuitive digital experiences that make yoga accessible to everyone.</p>
+                                    <div class="expertise-tags">
+                                        <span class="expertise-tag">Front-end</span>
+                                        <span class="expertise-tag">UX Design</span>
+                                        <span class="expertise-tag">React</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Student 2 -->
+                            <div class="team-member student-member">
+                                <div class="team-img-wrapper">
+                                    <img src="" alt="Data Scientist" class="team-img">
+                                    <div class="member-category student-tag">Student</div>
+                                    <div class="social-icons">
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                        <a href="#"><i class="fab fa-github"></i></a>
+                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-info">
+                                    <h3>Sharmin</h3>
+                                    <p class="position">Yoga Performer & Dataset</p>
+                                    <p class="bio">Sharmin developed the machine learning algorithms that power our mood-based yoga recommendations, bringing personalization to your practice.</p>
+                                    <div class="expertise-tags">
+                                        <span class="expertise-tag">Machine Learning</span>
+                                        <span class="expertise-tag">Python</span>
+                                        <span class="expertise-tag">Data Analysis</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Student 3 -->
+                            <div class="team-member student-member">
+                                <div class="team-img-wrapper">
+                                    <img src="" alt="UI Designer" class="team-img">
+                                    <div class="member-category student-tag">Student</div>
+                                    <div class="social-icons">
+                                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                                <div class="team-info">
+                                    <h3>Rithvik</h3>
+                                    <p class="position">Yoga Performer & Dataset</p>
+                                    <p class="bio">Rithvik creates beautiful, intuitive interfaces that enhance the digital yoga experience while maintaining the essence of traditional practices.</p>
+                                    <div class="expertise-tags">
+                                        <span class="expertise-tag">UI Design</span>
+                                        <span class="expertise-tag">Figma</span>
+                                        <span class="expertise-tag">Accessibility</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Faculty Only View (Initially Hidden) -->
+                <div id="faculty-view" style="display: none;">
+                    <div class="faculty-row">
+                        <!-- Faculty Member 1 -->
+                        <div class="team-member faculty-member">
+                            <div class="team-img-wrapper">
+                                <img src="team1.png" alt="Yoga Instructor" class="team-img">
+                                <div class="member-category faculty-tag">Faculty</div>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <h3>Aanya Sharma</h3>
+                                <p class="position">Lead Yoga Instructor</p>
+                                <p class="bio">With over 15 years of experience in various yoga traditions, Aanya brings a holistic approach to yoga that focuses on mind-body integration.</p>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">Hatha Yoga</span>
+                                    <span class="expertise-tag">Meditation</span>
+                                    <span class="expertise-tag">Ayurveda</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Faculty Member 2 -->
+                        <div class="team-member faculty-member">
+                            <div class="team-img-wrapper">
+                                <img src='images/team2.jpg' alt="Wellness Expert" class="team-img">
+                                <div class="member-category faculty-tag">Faculty</div>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <h3>Raj Patel</h3>
+                                <p class="position">Wellness Coach</p>
+                                <p class="bio">Raj specializes in integrating traditional yoga practices with modern wellness science to create personalized healing journeys.</p>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">Vinyasa Flow</span>
+                                    <span class="expertise-tag">Wellness</span>
+                                    <span class="expertise-tag">Nutrition</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Students Only View (Initially Hidden) -->
+                <div id="student-view" style="display: none;">
+                    <div class="students-row">
+                        <!-- Student 1 -->
+                        <div class="team-member student-member">
+                            <div class="team-img-wrapper">
+                                <img src="team1.png" alt="Developer" class="team-img">
+                                <div class="member-category student-tag">Student</div>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-github"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <h3>Arjun Mehta</h3>
+                                <p class="position">Lead Developer</p>
+                                <p class="bio">Arjun combines his passion for yoga with technical expertise to create intuitive digital experiences that make yoga accessible to everyone.</p>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">Front-end</span>
+                                    <span class="expertise-tag">UX Design</span>
+                                    <span class="expertise-tag">React</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Student 2 -->
+                        <div class="team-member student-member">
+                            <div class="team-img-wrapper">
+                                <img src="team1.png" alt="Data Scientist" class="team-img">
+                                <div class="member-category student-tag">Student</div>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-github"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <h3>Priya Kapoor</h3>
+                                <p class="position">Data Scientist</p>
+                                <p class="bio">Priya developed the machine learning algorithms that power our mood-based yoga recommendations, bringing personalization to your practice.</p>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">Machine Learning</span>
+                                    <span class="expertise-tag">Python</span>
+                                    <span class="expertise-tag">Data Analysis</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Student 3 -->
+                        <div class="team-member student-member">
+                            <div class="team-img-wrapper">
+                                <img src="images\team5.png" alt="UI Designer" class="team-img">
+                                <div class="member-category student-tag">Student</div>
+                                <div class="social-icons">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <h3>Vikram Singh</h3>
+                                <p class="position">UI/UX Designer</p>
+                                <p class="bio">Vikram creates beautiful, intuitive interfaces that enhance the digital yoga experience while maintaining the essence of traditional practices.</p>
+                                <div class="expertise-tags">
+                                    <span class="expertise-tag">UI Design</span>
+                                    <span class="expertise-tag">Figma</span>
+                                    <span class="expertise-tag">Accessibility</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+         <!-- Footer -->
+         <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3>AtmaYoga</h3>
+                        <p>Find your inner balance through personalized yoga practices.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="asanas.html">Asanas</a></li>
+                            <li><a href="form.html">Get Recommendations</a></li>
+                            <li><a href="team.html">Our Team</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="#">Yoga for Beginners</a></li>
+                            <li><a href="#">Meditation Guides</a></li>
+                            <li><a href="#">Breathing Techniques</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>Contact Us</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Amrita Vishwa Vidyapeetam</p>
+                        <p><i class="fas fa-phone"></i> +91 1234567890</p>
+                        <p><i class="fas fa-envelope"></i> info@atmayoga.com</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 AtmaYoga. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        
+        // Team category tabs functionality
+        const categoryTabs = document.querySelectorAll('.category-tab');
+        const allView = document.getElementById('all-view');
+        const facultyView = document.getElementById('faculty-view');
+        const studentView = document.getElementById('student-view');
+        
+        categoryTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                categoryTabs.forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show appropriate view based on data-category
+                const category = this.getAttribute('data-category');
+                
+                if (category === 'all') {
+                    allView.style.display = 'block';
+                    facultyView.style.display = 'none';
+                    studentView.style.display = 'none';
+                } else if (category === 'faculty') {
+                    allView.style.display = 'none';
+                    facultyView.style.display = 'block';
+                    studentView.style.display = 'none';
+                } else if (category === 'student') {
+                    allView.style.display = 'none';
+                    facultyView.style.display = 'none';
+                    studentView.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

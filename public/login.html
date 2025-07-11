@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Signup - AtmaYoga</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Updated to root path -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #7e57c2;
+            --primary-dark: #4d2c91;
+            --primary-light: #b085f5;
+            --secondary-color: #66bb6a;
+            --secondary-dark: #338a3e;
+            --secondary-light: #98ee99;
+            --accent-color: #ff7043;
+            --text-dark: #333333;
+            --text-light: #f5f5f5;
+            --text-gray: #777777;
+            --bg-light: #ffffff;
+            --bg-gray: #f8f9fa;
+            --bg-dark: #212121;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Custom styles for enhanced login/signup */
+        .auth-page {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--primary-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .auth-container {
+            flex: 1;
+            padding: 5% 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .auth-card {
+            background: var(--bg-light);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(126, 87, 194, 0.2);
+            overflow: hidden;
+            width: 90%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: row-reverse;
+            position: relative;
+        }
+        
+        .auth-visual {
+            flex: 1;
+            background: linear-gradient(to right, rgba(77, 44, 145, 0.9), rgba(126, 87, 194, 0.9)), 
+                        url('https://source.unsplash.com/random/1200x800/?yoga,meditation') center/cover no-repeat;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-visual::before {
+            content: "";
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .auth-visual::after {
+            content: "";
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .lotus-icon {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0.1;
+        }
+        
+        .lotus-icon:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            transform: rotate(15deg);
+        }
+        
+        .lotus-icon:nth-child(2) {
+            bottom: 15%;
+            right: 10%;
+            transform: rotate(-10deg);
+        }
+        
+        .lotus-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: white;
+        }
+        
+        .auth-visual h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .auth-visual p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .auth-quote {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-top: auto;
+            position: relative;
+            z-index: 1;
+            padding-left: 20px;
+            border-left: 3px solid var(--secondary-light);
+        }
+        
+        .auth-forms {
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .auth-header {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(126, 87, 194, 0.2);
+            margin-bottom: 20px;
+        }
+        
+        .auth-tab {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .auth-tab.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .auth-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .auth-tab.active::after {
+            width: 100%;
+        }
+        
+        .auth-tab:hover::after {
+            width: 40%;
+        }
+        
+        .auth-form {
+            transition: all 0.4s ease;
+        }
+        
+        .auth-form.hidden {
+            opacity: 0;
+            transform: translateX(20px);
+            display: none;
+        }
+        
+        .auth-form h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .auth-form h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .auth-form p {
+            color: var(--text-gray);
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .input-icon {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            background: var(--bg-gray);
+        }
+        
+        .input-icon:focus-within {
+            border-color: var(--primary-color);
+            background: var(--bg-light);
+            box-shadow: 0 5px 15px rgba(126, 87, 194, 0.1);
+        }
+        
+        .input-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+            transition: var(--transition);
+        }
+        
+        .input-icon input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            font-size: 1rem;
+            background: transparent;
+            transition: var(--transition);
+        }
+        
+        .input-icon:focus-within i {
+            color: var(--primary-color);
+        }
+        
+        .input-icon input:focus {
+            outline: none;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        .form-validation {
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #e57373;
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s ease;
+        }
+        
+        .form-validation.show {
+            height: auto;
+            padding: 5px 0;
+        }
+        
+        .password-strength {
+            margin-top: 8px;
+            width: 100%;
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+        
+        .password-strength-text {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            color: var(--text-gray);
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+            accent-color: var(--primary-color);
+        }
+        
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .forgot-password::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .forgot-password:hover::after {
+            width: 100%;
+        }
+        
+        .btn {
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--text-light);
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(126, 87, 194, 0.3);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+        
+        .btn-block {
+            width: 100%;
+            display: block;
+        }
+        
+        .form-agreement {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+            font-size: 0.9rem;
+        }
+        
+        .form-agreement input {
+            margin-right: 10px;
+            margin-top: 3px;
+            accent-color: var(--primary-color);
+        }
+        
+        .form-agreement a {
+            color: var(--primary-color);
+            text-decoration: none;
+            position: relative;
+        }
+        
+        .form-agreement a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -1px;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .form-agreement a:hover::after {
+            width: 100%;
+        }
+        
+        .decoration-element {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary-light);
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .decoration-1 {
+            width: 100px;
+            height: 100px;
+            top: -30px;
+            right: -30px;
+        }
+        
+        .decoration-2 {
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            left: -20px;
+        }
+        
+        /* Password validation styles */
+        .password-criteria {
+            margin-top: 8px;
+            font-size: 0.8rem;
+        }
+        
+        .criteria-item {
+            color: var(--text-gray);
+            margin-bottom: 3px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .criteria-item i {
+            margin-right: 5px;
+            font-size: 0.7rem;
+        }
+        
+        .criteria-item.valid {
+            color: var(--secondary-color);
+        }
+        
+        .criteria-item.invalid {
+            color: #e57373;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .auth-card {
+                flex-direction: column;
+                max-width: 500px;
+            }
+            
+            .auth-visual {
+                padding: 30px;
+            }
+            
+            .auth-visual h1 {
+                font-size: 2rem;
+            }
+            
+            .auth-forms {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body class="auth-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="./images/icon.png" alt="AtmaYoga Logo" style="height: 40px; width: auto;">
+                    AtmaYoga</a> <!-- Updated path -->
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Decorative elements -->
+            <div class="decoration-element decoration-1"></div>
+            <div class="decoration-element decoration-2"></div>
+            
+            <div class="auth-visual">
+                <!-- Lotus icons -->
+                <div class="lotus-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M12.5,7H11.5C10.4,7 9.5,7.9 9.5,9V14.5H10.25V22H13.75V14.5H14.5V9C14.5,7.9 13.6,7 12.5,7Z" />
+                    </svg>
+                </div>
+                <div class="lotus-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12,2C13.1,2 14,2.9 14,4C14,5.1 13.1,6 12,6C10.9,6 10,5.1 10,4C10,2.9 10.9,2 12,2M12.5,7H11.5C10.4,7 9.5,7.9 9.5,9V14.5H10.25V22H13.75V14.5H14.5V9C14.5,7.9 13.6,7 12.5,7Z" />
+                    </svg>
+                </div>
+                
+                <h1>Discover Your Inner Peace</h1>
+                <p>Join AtmaYoga to begin a transformative journey that harmonizes your mind, body, and spirit through personalized yoga practices.</p>
+                <div class="auth-quote">
+                    "Yoga is the journey of the self, through the self, to the self." - The Bhagavad Gita
+                </div>
+            </div>
+            
+            <div class="auth-forms">
+                <div class="auth-header">
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" id="login-tab">Login</button>
+                        <button class="auth-tab" id="signup-tab">Sign Up</button>
+                    </div>
+                </div>
+                
+                <!-- Login Form -->
+                <div class="auth-form" id="login-form">
+                    <h2>Welcome Back</h2>
+                    <p>Enter your credentials to continue your yoga journey</p>
+                    
+                    <form id="login-form-element" novalidate>
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <div class="input-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="login-email" placeholder="Your email address" required>
+                            </div>
+                            <div class="form-validation" id="login-email-validation">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <div class="input-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="login-password" placeholder="Your password" required>
+                                <span class="password-toggle" id="login-password-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                            <div class="form-validation" id="login-password-validation">Password cannot be empty</div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                </div>
+                
+                <!-- Signup Form -->
+                <div class="auth-form hidden" id="signup-form">
+                    <h2>Create Account</h2>
+                    <p>Join our community and begin your yoga journey</p>
+                    
+                    <form id="signup-form-element" novalidate>
+                        <div class="form-group">
+                            <label for="signup-name">Full Name</label>
+                            <div class="input-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="signup-name" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-validation" id="signup-name-validation">Please enter your full name</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-email">Email</label>
+                            <div class="input-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="signup-email" placeholder="Your email address" required>
+                            </div>
+                            <div class="form-validation" id="signup-email-validation">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-password">Password</label>
+                            <div class="input-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signup-password" placeholder="Create a password" required>
+                                <span class="password-toggle" id="signup-password-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                            <div class="password-strength">
+                                <div class="password-strength-bar" id="password-strength-bar"></div>
+                            </div>
+                            <div class="password-strength-text" id="password-strength-text">Password strength</div>
+                            <div class="password-criteria" id="password-criteria">
+                                <div class="criteria-item" id="length-criteria">
+                                    <i class="fas fa-circle"></i> At least 8 characters
+                                </div>
+                                <div class="criteria-item" id="uppercase-criteria">
+                                    <i class="fas fa-circle"></i> At least one uppercase letter
+                                </div>
+                                <div class="criteria-item" id="lowercase-criteria">
+                                    <i class="fas fa-circle"></i> At least one lowercase letter
+                                </div>
+                                <div class="criteria-item" id="number-criteria">
+                                    <i class="fas fa-circle"></i> At least one number
+                                </div>
+                                <div class="criteria-item" id="special-criteria">
+                                    <i class="fas fa-circle"></i> At least one special character
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signup-confirm-password">Confirm Password</label>
+                            <div class="input-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="signup-confirm-password" placeholder="Confirm your password" required>
+                                <span class="password-toggle" id="signup-confirm-password-toggle">
+                                    <i class="fas fa-eye"></i>
+                                </span>
+                            </div>
+                            <div class="form-validation" id="signup-confirm-password-validation">Passwords do not match</div>
+                        </div>
+                        
+                        <div class="form-agreement">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2025 AtmaYoga. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle between login and signup forms
+            const loginTab = document.getElementById('login-tab');
+            const signupTab = document.getElementById('signup-tab');
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            
+            loginTab.addEventListener('click', function() {
+                loginTab.classList.add('active');
+                signupTab.classList.remove('active');
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+            });
+            
+            signupTab.addEventListener('click', function() {
+                signupTab.classList.add('active');
+                loginTab.classList.remove('active');
+                signupForm.classList.remove('hidden');
+                loginForm.classList.add('hidden');
+            });
+            
+            // Password toggle functionality
+            const passwordToggles = document.querySelectorAll('.password-toggle');
+            passwordToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    const input = this.previousElementSibling;
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+            
+            // Email validation function
+            function validateEmail(email) {
+                const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+            
+            // Password validation functions
+            function validatePassword(password) {
+                const minLength = 8;
+                const hasUpperCase = /[A-Z]/.test(password);
+                const hasLowerCase = /[a-z]/.test(password);
+                const hasNumber = /[0-9]/.test(password);
+                const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                
+                return {
+                    length: password.length >= minLength,
+                    uppercase: hasUpperCase,
+                    lowercase: hasLowerCase,
+                    number: hasNumber,
+                    special: hasSpecial,
+                    isValid: password.length >= minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecial
+                };
+            }
+            
+            // Update password criteria validation UI
+            function updatePasswordCriteria(validationResult) {
+                const lengthCriteria = document.getElementById('length-criteria');
+                const uppercaseCriteria = document.getElementById('uppercase-criteria');
+                const lowercaseCriteria = document.getElementById('lowercase-criteria');
+                const numberCriteria = document.getElementById('number-criteria');
+                const specialCriteria = document.getElementById('special-criteria');
+                
+                updateCriteriaItem(lengthCriteria, validationResult.length);
+                updateCriteriaItem(uppercaseCriteria, validationResult.uppercase);
+                updateCriteriaItem(lowercaseCriteria, validationResult.lowercase);
+                updateCriteriaItem(numberCriteria, validationResult.number);
+                updateCriteriaItem(specialCriteria, validationResult.special);
+                
+                // Update strength bar
+                const strengthBar = document.getElementById('password-strength-bar');
+                const strengthText = document.getElementById('password-strength-text');
+                
+                const criteria = [
+                    validationResult.length,
+                    validationResult.uppercase,
+                    validationResult.lowercase,
+                    validationResult.number,
+                    validationResult.special
+                ];
+                
+                const metCriteria = criteria.filter(Boolean).length;
+                const strengthPercentage = (metCriteria / criteria.length) * 100;
+                
+                strengthBar.style.width = strengthPercentage + '%';
+                
+                if (strengthPercentage <= 20) {
+                    strengthBar.style.background = '#e57373'; // Weak (red)
+                    strengthText.textContent = 'Very Weak';
+                } else if (strengthPercentage <= 40) {
+                    strengthBar.style.background = '#ffb74d'; // Fair (orange)
+                    strengthText.textContent = 'Weak';
+                } else if (strengthPercentage <= 60) {
+                    strengthBar.style.background = '#ffd54f'; // Good (yellow)
+                    strengthText.textContent = 'Fair';
+                } else if (strengthPercentage <= 80) {
+                    strengthBar.style.background = '#aed581'; // Strong (light green)
+                    strengthText.textContent = 'Good';
+                } else {
+                    strengthBar.style.background = '#66bb6a'; // Very strong (green)
+                    strengthText.textContent = 'Strong';
+                }
+            }
+            
+            function updateCriteriaItem(element, isValid) {
+                const icon = element.querySelector('i');
+                
+                if (isValid) {
+                    element.classList.add('valid');
+                    element.classList.remove('invalid');
+                    icon.classList.remove('fa-circle');
+                    icon.classList.add('fa-check-circle');
+                } else {
+                    element.classList.add('invalid');
+                    element.classList.remove('valid');
+                    icon.classList.remove('fa-check-circle');
+                    icon.classList.add('fa-circle');
+                }
+            }
+            
+            // Password strength checker
+            const signupPassword = document.getElementById('signup-password');
+            signupPassword.addEventListener('input', function() {
+                const validation = validatePassword(this.value);
+                updatePasswordCriteria(validation);
+            });
+            
+            // Login form validation
+            const loginFormElement = document.getElementById('login-form-element');
+            const loginEmailInput = document.getElementById('login-email');
+            const loginPasswordInput = document.getElementById('login-password');
+            const loginEmailValidation = document.getElementById('login-email-validation');
+            const loginPasswordValidation = document.getElementById('login-password-validation');
+            
+            loginEmailInput.addEventListener('blur', function() {
+                if (!validateEmail(this.value) && this.value.trim() !== '') {
+                    loginEmailValidation.classList.add('show');
+                } else {
+                    loginEmailValidation.classList.remove('show');
+                }
+            });
+            
+            loginPasswordInput.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    loginPasswordValidation.classList.add('show');
+                } else {
+                    loginPasswordValidation.classList.remove('show');
+                }
+            });
+            
+            loginFormElement.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                let isValid = true;
+
+                // Validate email
+                if (!validateEmail(loginEmailInput.value) && loginEmailInput.value.trim() !== '') {
+                    loginEmailValidation.classList.add('show');
+                    isValid = false;
+                } else if (loginEmailInput.value.trim() === '') {
+                    loginEmailValidation.textContent = 'Email cannot be empty';
+                    loginEmailValidation.classList.add('show');
+                    isValid = false;
+                } else {
+                    loginEmailValidation.classList.remove('show');
+                }
+
+                // Validate password
+                if (loginPasswordInput.value.trim() === '') {
+                    loginPasswordValidation.classList.add('show');
+                    isValid = false;
+                } else {
+                    loginPasswordValidation.classList.remove('show');
+                }
+
+                if (isValid) {
+                    try {
+                        const response = await fetch('http://localhost:3000/api/login', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                email: loginEmailInput.value,
+                                password: loginPasswordInput.value,
+                                remember: document.getElementById('remember').checked,
+                            }),
+                        });
+
+                        const data = await response.json();
+                        if (response.ok) {
+                            alert(data.message);
+                            window.location.href = './index.html'; // Updated redirect path
+                        } else {
+                            alert(data.message);
+                        }
+                    } catch (error) {
+                        alert('Error connecting to server');
+                        console.error(error);
+                    }
+                }
+            });
+
+            // Signup form validation
+            const signupFormElement = document.getElementById('signup-form-element');
+            const signupNameInput = document.getElementById('signup-name');
+            const signupEmailInput = document.getElementById('signup-email');
+            const signupConfirmPasswordInput = document.getElementById('signup-confirm-password');
+            const signupNameValidation = document.getElementById('signup-name-validation');
+            const signupEmailValidation = document.getElementById('signup-email-validation');
+            const signupConfirmPasswordValidation = document.getElementById('signup-confirm-password-validation');
+            const termsCheckbox = document.getElementById('terms');
+            
+            signupNameInput.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    signupNameValidation.classList.add('show');
+                } else {
+                    signupNameValidation.classList.remove('show');
+                }
+            });
+            
+            signupEmailInput.addEventListener('blur', function() {
+                if (!validateEmail(this.value) && this.value.trim() !== '') {
+                    signupEmailValidation.classList.add('show');
+                } else {
+                    signupEmailValidation.classList.remove('show');
+                }
+            });
+            
+            signupConfirmPasswordInput.addEventListener('blur', function() {
+                if (this.value !== signupPassword.value) {
+                    signupConfirmPasswordValidation.classList.add('show');
+                } else {
+                    signupConfirmPasswordValidation.classList.remove('show');
+                }
+            });
+            
+            signupFormElement.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                let isValid = true;
+
+                // Validate name
+                if (signupNameInput.value.trim() === '') {
+                    signupNameValidation.classList.add('show');
+                    isValid = false;
+                } else {
+                    signupNameValidation.classList.remove('show');
+                }
+
+                // Validate email
+                if (!validateEmail(signupEmailInput.value) && signupEmailInput.value.trim() !== '') {
+                    signupEmailValidation.classList.add('show');
+                    isValid = false;
+                } else if (signupEmailInput.value.trim() === '') {
+                    signupEmailValidation.textContent = 'Email cannot be empty';
+                    signupEmailValidation.classList.add('show');
+                    isValid = false;
+                } else {
+                    signupEmailValidation.classList.remove('show');
+                }
+
+                // Validate password
+                const passwordValidation = validatePassword(signupPassword.value);
+                if (!passwordValidation.isValid) {
+                    isValid = false;
+                }
+
+                // Validate confirm password
+                if (signupConfirmPasswordInput.value !== signupPassword.value) {
+                    signupConfirmPasswordValidation.classList.add('show');
+                    isValid = false;
+                } else {
+                    signupConfirmPasswordValidation.classList.remove('show');
+                }
+
+                // Validate terms
+                if (!termsCheckbox.checked) {
+                    isValid = false;
+                    alert('Please accept the Terms of Service and Privacy Policy');
+                }
+
+                if (isValid) {
+                    try {
+                        const response = await fetch('http://localhost:3000/api/signup', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                name: signupNameInput.value,
+                                email: signupEmailInput.value,
+                                password: signupPassword.value,
+                            }),
+                        });
+
+                        const data = await response.json();
+                        if (response.ok) {
+                            alert(data.message);
+                            loginTab.click(); // Switch to login tab
+                        } else {
+                            alert(data.message);
+                        }
+                    } catch (error) {
+                        alert('Error connecting to server');
+                        console.error(error);
+                    }
+                }
+            });
+            
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (mobileMenuButton && navMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
