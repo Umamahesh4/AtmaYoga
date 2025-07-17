@@ -1,0 +1,438 @@
+.team-container {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f9f7ff 0%, #f5f0ff 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%237d5fff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+.sacred-geometry {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ccircle cx='150' cy='150' r='140' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3Ccircle cx='150' cy='150' r='120' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3Ccircle cx='150' cy='150' r='100' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3Ccircle cx='150' cy='150' r='80' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3Ccircle cx='150' cy='150' r='60' fill='none' stroke='%237d5fff' stroke-width='1' stroke-opacity='0.1'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.sacred-geometry-1 {
+    top: -150px;
+    left: -150px;
+}
+
+.sacred-geometry-2 {
+    bottom: -150px;
+    right: -150px;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+.team-section-header {
+    text-align: center;
+    margin-bottom: 70px;
+    position: relative;
+}
+
+.team-section-header h2 {
+    font-size: 2.8rem;
+    color: #3a3a3a;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.team-section-header h2::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #7d5fff, #9d86ff);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+}
+
+.team-section-header p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 700px;
+    margin: 20px auto 0;
+    line-height: 1.7;
+}
+
+.team-categories {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.category-tab {
+    padding: 12px 28px;
+    margin: 0 10px;
+    background-color: #fff;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border: none; 
+    outline: none; 
+    font-size: 17px;
+}
+
+.category-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #4d2c91, #9d86ff);
+    transition: all 0.4s ease;
+    z-index: -1;
+    border-radius: 30px;
+}
+
+.category-tab:hover::before {
+    width: 100%;
+}
+
+.category-tab:hover {
+    color: white;
+}
+
+.category-tab.active {
+    background: linear-gradient(90deg, #4d2c91, #9d86ff);
+    color: white;
+    box-shadow: 0 5px 15px rgba(125, 95, 255, 0.4);
+}
+
+
+/* Faculty section */
+.team-section {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    display: inline-block;
+    position: relative;
+    padding-left: 15px;
+    color: #333;
+}
+
+.section-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10%;
+    height: 80%;
+    width: 5px;
+    background: linear-gradient(180deg, #7d5fff, #9d86ff);
+    border-radius: 3px;
+}
+
+.faculty-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.students-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+@media (max-width: 992px) {
+    .faculty-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .students-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .students-row {
+        grid-template-columns: 1fr;
+    }
+
+    .category-tab {
+        padding: 10px 20px; /* Adjust padding for smaller screens */
+        font-size: 14px; /* Reduce font size */
+        margin: 0 5px; /* Adjust margin for smaller screens */
+    }
+}
+
+.team-member {
+    position: relative;
+    background-color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    z-index: 1;
+}
+
+.team-member::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #7d5fff, #9d86ff);
+    z-index: 2;
+}
+
+.faculty-member::before {
+    background: linear-gradient(90deg, #ff7d7d, #ffb17d);
+}
+
+.team-member:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.team-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 280px;
+}
+
+.team-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.team-member:hover .team-img {
+    transform: scale(1.08);
+}
+
+.member-category {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 2;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.faculty-tag {
+    background: linear-gradient(90deg, #ff7d7d, #ffb17d);
+    color: white;
+}
+
+.student-tag {
+    background: linear-gradient(90deg, #7d5fff, #9d86ff);
+    color: white;
+}
+
+.social-icons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4), transparent);
+    padding: 30px 15px 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    display: flex;
+    justify-content: center;
+}
+
+.team-member:hover .social-icons {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 0 6px;
+    color: #333;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    transform: translateY(10px);
+    opacity: 0;
+}
+
+.team-member:hover .social-icons a {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.team-member:hover .social-icons a:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.team-member:hover .social-icons a:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.team-member:hover .social-icons a:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.team-member:hover .social-icons a:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.social-icons a:hover {
+    transform: translateY(-5px) scale(1.1) !important;
+}
+
+.faculty-member .social-icons a:hover {
+    background: linear-gradient(90deg, #ff7d7d, #ffb17d);
+    color: white;
+}
+
+.student-member .social-icons a:hover {
+    background: linear-gradient(90deg, #7d5fff, #9d86ff);
+    color: white;
+}
+
+.team-info {
+    padding: 30px 25px;
+    text-align: center;
+    position: relative;
+}
+
+.team-info::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #eaeaea;
+    border-radius: 3px;
+}
+
+.team-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: #333;
+    position: relative;
+    display: inline-block;
+}
+
+.position {
+    font-weight: 600;
+    margin-bottom: 18px;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+.faculty-member .position {
+    color: #ff7d7d;
+}
+
+.student-member .position {
+    color: #7d5fff;
+}
+
+.bio {
+    color: #666;
+    line-height: 1.7;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.faculty-member .expertise-tag {
+    background-color: #fff0ec;
+    color: #ff7d7d;
+}
+
+.student-member .expertise-tag {
+    background-color: #f0ecff;
+    color: #7d5fff;
+}
+
+.expertise-tag {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.expertise-tag:hover {
+    transform: translateY(-3px);
+}
+
+/* Om symbol animation */
+.om-animation {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%237d5fff' fill-opacity='0.1' d='M291.5 165c-22.4 0-42.4 10.4-55.5 26.8-13.1-16.4-33.1-26.8-55.5-26.8-39.6 0-71.5 32-71.5 71.5 0 49.4 44.9 94.3 115.5 158.4l11.5 10.4 11.5-10.4c70.6-64.1 115.5-109 115.5-158.4 0-39.6-32-71.5-71.5-71.5zm-55.5 205.9c-59.6-54.2-99.5-90.8-99.5-134.4 0-24.5 19.9-44.5 44.5-44.5 19.6 0 36.3 12.7 42.3 30.3h25.3c6-17.6 22.7-30.3 42.3-30.3 24.5 0 44.5 19.9 44.5 44.5.1 43.6-39.8 80.2-99.4 134.4z'/%3E%3C/svg%3E");
+    animation: floatAnimation 10s infinite ease-in-out;
+    opacity: 0.6;
+}
+
+.om-1 {
+    top: 10%;
+    left: 5%;
+    animation-delay: 0s;
+}
+
+.om-2 {
+    top: 30%;
+    right: 8%;
+    animation-delay: 2s;
+}
+
+.om-3 {
+    bottom: 15%;
+    left: 12%;
+    animation-delay: 4s;
+}
+
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
