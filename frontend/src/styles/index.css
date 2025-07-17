@@ -42,12 +42,6 @@ body {
     padding: 0 20px;
 }
 
-.page-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
 section {
     padding: 80px 0;
 }
