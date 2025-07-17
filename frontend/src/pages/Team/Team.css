@@ -95,6 +95,7 @@
     border: none; 
     outline: none; 
     font-size: 17px;
+    color: var(--text-dark);
 }
 
 .category-tab::before {
