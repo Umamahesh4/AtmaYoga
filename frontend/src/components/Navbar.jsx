@@ -6,7 +6,11 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => {
+      const nextState = !prev;
+      document.body.style.overflow = nextState ? 'hidden' : 'auto';
+      return nextState;
+    });
   };
 
   return (
