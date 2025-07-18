@@ -150,33 +150,23 @@
     position: relative;
 }
 
-.step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 40px;
-    right: -50px;
-    width: 100px;
-    height: 2px;
-    background-color: var(--primary-light);
-}
-
-.step-number {
-    width: 60px;
-    height: 60px;
+.circle {
     background-color: var(--primary-color);
     color: var(--text-light);
+    display: inline-block;
+    width: 60px;
+    width: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 50%;
     font-size: 24px;
     font-weight: 700;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
 }
 
 .step h3 {
     font-size: 1.2rem;
-    margin-bottom: 15px;
+    padding: 20px 0;
+    margin: 0;
 }
 
 .step p {

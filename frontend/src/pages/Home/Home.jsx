@@ -58,17 +58,17 @@ function Home() {
           <h2>How It Works</h2>
           <div className="steps">
             <div className="step">
-              <div className="step-number">1</div>
+              <span className="circle">1</span>
               <h3>Fill the Questionnaire</h3>
               <p>Answer questions about your mood, physical condition, and lifestyle.</p>
             </div>
             <div className="step">
-              <div className="step-number">2</div>
+              <span className="circle">2</span>
               <h3>Get Recommendations</h3>
               <p>Our system analyzes your responses and suggests the best asanas for you.</p>
             </div>
             <div className="step">
-              <div className="step-number">3</div>
+              <span className="circle">3</span>
               <h3>Practice & Improve</h3>
               <p>Follow the recommended practices and track your progress over time.</p>
             </div>
