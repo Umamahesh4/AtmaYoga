@@ -7,11 +7,11 @@ function Team() {
     const faculty = [
         {
             id: 1,
-            name: "T.Senthil Kumar Sir",
+            name: "Dr. Senthil Kumar T.",
             position: "Project Lead",
             bio: "Professor, School of Computing, Coimbatore",
             email: "t_senthilkumar@cb.amrita.edu",
-            img: "https://placehold.co/400x400",
+            img: "/images/Dr-Senthil-Kumar-T_associate-professor_cse_engineering_coimbatore.jpg",
             imgAlt: "Professor Senthil Kumar in meditative pose",
             social: [
                 { icon: "facebook-f", url: "#" },
@@ -22,11 +22,11 @@ function Team() {
         },
         {
             id: 2,
-            name: "B.Senthil Kumar Sir",
+            name: "B. Senthil Kumar",
             position: "Yoga Instructor",
-            bio: "Assistant Professor, Spiritual Studies",
+            bio: "Assistant Professor, Spiritual Studies, Coimbatore",
             email: "b_senthilkumar@cb.amrita.edu",
-            img: "https://placehold.co/400x400",
+            img: "/images/b-senthilkumar.jpg",
             imgAlt: "Professor B. Senthil Kumar demonstrating yoga posture",
             social: [
                 { icon: "facebook-f", url: "#" },
