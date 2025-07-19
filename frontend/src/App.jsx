@@ -5,6 +5,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home/Home";
 import Team from "./pages/Team/Team";
 import About from "./pages/About/About";
+import AsanasLibrary from "./pages/Asanas/AsanasLibrary";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/team" element={<Team />} />
         <Route path="/about" element={<About />} />
-        
+        <Route path="/asanas" element={<AsanasLibrary />} />
       </Routes>
       <Footer />
     </Router>
