@@ -6,7 +6,7 @@ function Home() {
       {/* Hero Section */}
       <header className="hero">
         <div className="container">
-          <div className="hero-content">
+          <div className="hero-content-home">
             <h1>
               Find Your Balance with <span>AtmaYoga</span>
             </h1>
