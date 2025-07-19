@@ -57,7 +57,7 @@ export const asanasData = [
     {
         name: "Warrior I",
         sanskrit: "Vīrabhadrāsana I",
-        image: "./images/Asanas/virabadrasana1.jpg",
+        image: "./images/Asanas/virabadrasana.jpg",
         description: "A standing pose that builds focus, power, and stability.",
         benefits: [
             "Strengthens shoulders, arms, legs, ankles, and back",
@@ -122,7 +122,7 @@ export const asanasData = [
     {
         name: "Mountain Pose",
         sanskrit: "Tāḍāsana",
-        image: "./images/Asanas/tadasana.jpg",
+        image: "./images/Asanas/Tadasana.jpg",
         description: "A foundational standing pose that improves posture, balance, and body awareness.",
         benefits: [
             "Improves posture",
@@ -135,7 +135,7 @@ export const asanasData = [
     {
         name: "Supported Headstand",
         sanskrit: "Śirsāsana",
-        image: "./images/Asanas/Sirasasana.png",
+        image: "./images/Asanas/Sirasasana.jpg",
         description: "An inversion where the body is balanced on the forearms with the crown of the head on the floor.",
         benefits: [
             "Strengthens arms, legs, and spine",
@@ -174,7 +174,7 @@ export const asanasData = [
     {
         name: "Revolved Triangle Pose",
         sanskrit: "Utthita Trikonasana-Parivrtti Bhedha",
-        image: "./images/Asanas/DSC01124( Utthita Trikoṇāsana - Parivṛtti Bheda).jpg",
+        image: "./images/Asanas/Utthita Trikonosana.jpg",
         description: "A standing twist that improves balance and stretches the hamstrings.",
         benefits: [
             "Stretches and strengthens the legs",

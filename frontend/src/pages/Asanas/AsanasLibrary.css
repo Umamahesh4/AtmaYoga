@@ -148,13 +148,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    transform: translateY(30px);
-    opacity: 0;
-}
-
-.asana-card.animate-in {
-    transform: translateY(0);
-    opacity: 1;
 }
 
 .asana-card:hover {
@@ -361,30 +354,6 @@
     }
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
 /* Expanded Card Styles */
 .asana-card.expanded {
     grid-column: 1 / -1;
@@ -422,20 +391,5 @@
     .advanced-filters {
         flex-direction: column;
         align-items: flex-start;
-    }
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
     }
 }
