@@ -188,6 +188,7 @@
     display: flex;
     overflow: hidden;
     position: relative;
+    border-radius: 10px;
 }
 
 .testimonial {
@@ -195,7 +196,6 @@
     padding: 30px;
     background-color: var(--bg-gray);
     border-radius: 10px;
-    box-shadow: var(--shadow);
     transition: transform 0.5s ease;
 }
 
