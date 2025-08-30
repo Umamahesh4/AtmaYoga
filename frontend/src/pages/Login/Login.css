@@ -1,0 +1,439 @@
+/* Custom styles for enhanced login/signup */
+
+.auth-container {
+    flex: 1;
+    padding: 5% 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    background: var(--bg-light);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(126, 87, 194, 0.2);
+    overflow: hidden;
+    width: 90%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+}
+
+.auth-visual {
+    flex: 1;
+    background: linear-gradient(to right, rgba(77, 44, 145, 0.9), rgba(126, 87, 194, 0.9)), 
+                url('https://source.unsplash.com/random/1200x800/?yoga,meditation') center/cover no-repeat;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-visual::before {
+    content: "";
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.auth-visual::after {
+    content: "";
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.lotus-icon {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    opacity: 0.1;
+}
+
+.lotus-icon:nth-child(1) {
+    top: 10%;
+    left: 20%;
+    transform: rotate(15deg);
+}
+
+.lotus-icon:nth-child(2) {
+    bottom: 15%;
+    right: 10%;
+    transform: rotate(-10deg);
+}
+
+.lotus-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: white;
+}
+
+.auth-visual h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-visual p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}
+
+.auth-quote {
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+    padding-left: 20px;
+    border-left: 3px solid var(--secondary-light);
+}
+
+.auth-forms {
+    flex: 1;
+    padding: 40px;
+}
+
+.auth-header {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.auth-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(126, 87, 194, 0.2);
+    margin-bottom: 20px;
+}
+
+.auth-tab {
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: none;
+    border: none;
+    color: var(--text-gray);
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+.auth-tab.active {
+    color: var(--primary-color);
+}
+
+.auth-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.auth-tab.active::after {
+    width: 100%;
+}
+
+.auth-tab:hover::after {
+    width: 40%;
+}
+
+.auth-form {
+    transition: all 0.4s ease;
+}
+
+.auth-form.hidden {
+    opacity: 0;
+    transform: translateX(20px);
+    display: none;
+}
+
+.auth-form h2 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: var(--primary-dark);
+    position: relative;
+    display: inline-block;
+}
+
+.auth-form h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.auth-form p {
+    color: var(--text-gray);
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.input-icon {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    background: var(--bg-gray);
+}
+
+.input-icon:focus-within {
+    border-color: var(--primary-color);
+    background: var(--bg-light);
+    box-shadow: 0 5px 15px rgba(126, 87, 194, 0.1);
+}
+
+.input-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-gray);
+    transition: var(--transition);
+}
+
+.input-icon input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: none;
+    font-size: 1rem;
+    background: transparent;
+    transition: var(--transition);
+}
+
+.input-icon:focus-within i {
+    color: var(--primary-color);
+}
+
+.input-icon input:focus {
+    outline: none;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-gray);
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--transition);
+}
+
+.password-toggle:hover {
+    color: var(--primary-color);
+}
+
+.form-validation {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #e57373;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.form-validation.show {
+    height: auto;
+    padding: 5px 0;
+}
+
+.password-strength {
+    margin-top: 8px;
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.password-strength-text {
+    font-size: 0.8rem;
+    margin-top: 5px;
+    color: var(--text-gray);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input {
+    margin-right: 8px;
+    accent-color: var(--primary-color);
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+}
+
+.forgot-password::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.forgot-password:hover::after {
+    width: 100%;
+}
+
+.form-agreement {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: flex-start;
+    font-size: 0.9rem;
+}
+
+.form-agreement input {
+    margin-right: 10px;
+    margin-top: 3px;
+    accent-color: var(--primary-color);
+}
+
+.form-agreement a {
+    color: var(--primary-color);
+    text-decoration: none;
+    position: relative;
+}
+
+.form-agreement a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -1px;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: var(--transition);
+}
+
+.form-agreement a:hover::after {
+    width: 100%;
+}
+
+.decoration-element {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--primary-light);
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.decoration-1 {
+    width: 100px;
+    height: 100px;
+    top: -30px;
+    right: -30px;
+}
+
+.decoration-2 {
+    width: 60px;
+    height: 60px;
+    bottom: 40px;
+    left: -20px;
+}
+
+/* Password validation styles */
+.password-criteria {
+    margin-top: 8px;
+    font-size: 0.8rem;
+}
+
+.criteria-item {
+    color: var(--text-gray);
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+}
+
+.criteria-item i {
+    margin-right: 5px;
+    font-size: 0.7rem;
+}
+
+.criteria-item.valid {
+    color: var(--secondary-color);
+}
+
+.criteria-item.invalid {
+    color: #e57373;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .auth-card {
+        flex-direction: column;
+        max-width: 500px;
+    }
+    
+    .auth-visual {
+        padding: 30px;
+    }
+    
+    .auth-visual h1 {
+        font-size: 2rem;
+    }
+    
+    .auth-forms {
+        padding: 30px;
+    }
+}
