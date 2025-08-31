@@ -132,6 +132,13 @@
   background: #f0f0f0;
 }
 
+/* Mobile profile icon */
+.mobile-profile-icon {
+  display: none;
+  font-size: 1.3rem;
+  color: #333;
+}
+
 @media screen and (max-width: 786px) {
   .nav-menu {
     position: fixed;
@@ -199,5 +206,9 @@
 
   .nav-menu li:last-child {
     display: none;
+  }
+
+  .mobile-profile-icon {
+    display: block;
   }
 }
