@@ -47,18 +47,6 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="container">
-        {/* Logo */}
-        <div className="logo">
-          <Link to="/">
-            <img
-              src="/images/logo.png"
-              alt="AtmaYoga Logo"
-              style={{ height: "40px", width: "auto" }}
-            />
-            AtmaYoga
-          </Link>
-        </div>
-
         {/* Mobile Menu Toggle */}
         <div
           className={`menu-toggle ${isOpen ? "active" : ""}`}
@@ -68,6 +56,16 @@ function Navbar() {
           <span className="bar"></span>
           <span className="bar"></span>
         </div>
+
+        {/* Logo */}
+        <div className="logo">
+          <Link to="/">AtmaYoga</Link>
+        </div>
+
+        {/* Mobile Profile Icon */}
+        <Link to={user ? "/account" : "/login"} className="mobile-profile-icon">
+          <i className="fas fa-user"></i>
+        </Link>
 
         {/* Nav Links */}
         <ul className={`nav-menu ${isOpen ? "active" : ""}`}>
