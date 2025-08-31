@@ -23,6 +23,10 @@ const Login = () => {
   // Validation errors
   const [errors, setErrors] = useState({});
 
+  // Form-level messages
+  const [loginMessage, setLoginMessage] = useState(null);
+  const [signupMessage, setSignupMessage] = useState(null);
+
   // Email regex
   const validateEmail = (email) => {
     const re =
@@ -57,6 +61,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     let newErrors = {};
+    setLoginMessage(null);
 
     if (!loginEmail) newErrors.loginEmail = "Email cannot be empty";
     else if (!validateEmail(loginEmail)) newErrors.loginEmail = "Invalid email";
@@ -80,14 +85,14 @@ const Login = () => {
         const data = await response.json();
 
         if (response.ok) {
-          alert(data.message);
+          setLoginMessage({ type: "success", text: data.message });
           login(data.user);
           navigate("/");
         } else {
-          alert(data.message);
+          setLoginMessage({ type: "error", text: data.message });
         }
       } catch (err) {
-        alert("Error connecting to server");
+        setLoginMessage({ type: "error", text: "Error connecting to server" });
         console.error(err);
       }
     }
@@ -97,15 +102,20 @@ const Login = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     let newErrors = {};
+    setSignupMessage(null);
     const passwordCheck = validatePassword(signupPassword);
 
     if (!signupName) newErrors.signupName = "Name cannot be empty";
     if (!signupEmail) newErrors.signupEmail = "Email cannot be empty";
     else if (!validateEmail(signupEmail))
       newErrors.signupEmail = "Invalid email";
-    if (!passwordCheck.isValid) newErrors.signupPassword = "Weak password";
+
+    if (!signupPassword) newErrors.signupPassword = "Password cannot be empty";
+    else if (!passwordCheck.isValid) newErrors.signupPassword = "Weak password";
+
     if (signupPassword !== signupConfirmPassword)
       newErrors.signupConfirmPassword = "Passwords do not match";
+
     if (!termsAccepted)
       newErrors.terms = "You must accept Terms and Privacy Policy";
 
@@ -129,14 +139,14 @@ const Login = () => {
         const data = await response.json();
 
         if (response.ok) {
-          alert(data.message);
+          setSignupMessage({ type: "success", text: data.message });
           login(data.user);
           setActiveTab("login");
         } else {
-          alert(data.message);
+          setSignupMessage({ type: "error", text: data.message });
         }
       } catch (err) {
-        alert("Error connecting to server");
+        setSignupMessage({ type: "error", text: "Error connecting to server" });
         console.error(err);
       }
     }
@@ -179,9 +189,20 @@ const Login = () => {
 
           {/* Login Form */}
           {activeTab === "login" && (
-            <form className="auth-form" onSubmit={handleLogin}>
+            <form className="auth-form" onSubmit={handleLogin} noValidate>
               <h2>Welcome Back</h2>
               <p>Enter your credentials to continue your yoga journey</p>
+
+              {/* Form-level message */}
+              {loginMessage && (
+                <div
+                  className={`form-message ${
+                    loginMessage.type === "success" ? "success" : "error"
+                  }`}
+                >
+                  {loginMessage.text}
+                </div>
+              )}
 
               <div className="form-group">
                 <label>Email</label>
@@ -237,9 +258,20 @@ const Login = () => {
 
           {/* Signup Form */}
           {activeTab === "signup" && (
-            <form className="auth-form" onSubmit={handleSignup}>
+            <form className="auth-form" onSubmit={handleSignup} noValidate>
               <h2>Create Account</h2>
               <p>Join our community and begin your yoga journey</p>
+
+              {/* Form-level message */}
+              {signupMessage && (
+                <div
+                  className={`form-message ${
+                    signupMessage.type === "success" ? "success" : "error"
+                  }`}
+                >
+                  {signupMessage.text}
+                </div>
+              )}
 
               <div className="form-group">
                 <label>Full Name</label>
@@ -308,17 +340,19 @@ const Login = () => {
               </div>
 
               <div className="form-agreement">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={termsAccepted}
-                    onChange={() => setTermsAccepted(!termsAccepted)}
-                  />{" "}
-                  I agree to the Terms of Service & Privacy Policy
-                </label>
-                {errors.terms && (
-                  <div className="form-validation">{errors.terms}</div>
-                )}
+                <div className="checkbox-container">
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={termsAccepted}
+                      onChange={() => setTermsAccepted(!termsAccepted)}
+                    />{" "}
+                    I agree to the Terms of Service & Privacy Policy
+                  </label>
+                  {errors.terms && (
+                    <div className="form-validation show">{errors.terms}</div>
+                  )}
+                </div>
               </div>
 
               <button type="submit" className="btn btn-primary btn-block">
