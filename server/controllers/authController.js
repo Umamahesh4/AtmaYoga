@@ -2,8 +2,8 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 // Create JWT
-const createToken = (userId) => {
-  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn: "1d" });
+const createToken = (userId, expiresIn = "15m") => {
+  return jwt.sign({ id: userId }, process.env.JWT_SECRET, { expiresIn });
 };
 
 // ========================
@@ -37,7 +37,7 @@ exports.register = async (req, res) => {
 // Login
 // ========================
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, remember } = req.body;
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(404).json({ message: "User not found" });
@@ -46,21 +46,31 @@ exports.login = async (req, res) => {
     if (!isMatch)
       return res.status(401).json({ message: "Incorrect password" });
 
-    const token = createToken(user._id);
+    // If remember me → 30 days
+    // Else → 15m session cookie
+    const jwtExpiry = remember ? "30d" : "15m";
+    const token = createToken(user._id, jwtExpiry);
+
+    const cookieOptions = {
+      httpOnly: true,
+      sameSite: "Strict",
+      secure: process.env.NODE_ENV === "production",
+    };
+
+    if (remember) {
+      cookieOptions.maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days
+    }
+    // no maxAge → session cookie
 
     res
-      .cookie("token", token, {
-        httpOnly: true,
-        maxAge: 86400000, // 1 day
-        sameSite: "Strict",
-        secure: process.env.NODE_ENV === "production",
-      })
+      .cookie("token", token, cookieOptions)
       .status(200)
       .json({ message: "Login successful", user });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+
 
 // ========================
 // Logout
