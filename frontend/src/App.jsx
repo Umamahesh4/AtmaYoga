@@ -7,6 +7,7 @@ import Team from "./pages/Team/Team";
 import About from "./pages/About/About";
 import AsanasLibrary from "./pages/Asanas/AsanasLibrary";
 import Login from "./pages/Login/Login";
+import AsanaLens from "./pages/AsanaLens/AsanaLens";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/asanas" element={<AsanasLibrary />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/asanalens" element={<AsanaLens />} />
       </Routes>
       <Footer />
     </Router>

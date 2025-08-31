@@ -114,6 +114,15 @@ function Navbar() {
               Our Team
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              onClick={() => closeMenuAndNavigate("/asanalens")}
+              to="/asanalens"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              AsanaLens
+            </NavLink>
+          </li>
 
           {/* Login/User Dropdown */}
           <li className="nav-user" ref={dropdownRef}>
