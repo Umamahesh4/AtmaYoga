@@ -24,7 +24,7 @@ IMG_HEIGHT = 256
 IMG_WIDTH = 256
 
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 # Allow React frontend to call the API
 CORS(app, origins=["http://localhost:5173"])
@@ -38,8 +38,8 @@ os.makedirs(RESULT_FOLDER, exist_ok=True)
 # # adding custom files for human segmentation part : -----------
 
 class CustomMeanIoU(tf.keras.metrics.MeanIoU):
-    def __init__(self, num_classes, name=None, dtype=None, **kwargs):
-        super(CustomMeanIoU, self).__init__(num_classes=num_classes, name=name, dtype=dtype)
+    def _init_(self, num_classes, name=None, dtype=None, **kwargs):
+        super(CustomMeanIoU, self)._init_(num_classes=num_classes, name=name, dtype=dtype)
     def update_state(self, y_true, y_pred, sample_weight=None):
         y_pred = tf.argmax(y_pred, axis=-1)
         return super(CustomMeanIoU, self).update_state(y_true, y_pred, sample_weight)
@@ -60,8 +60,8 @@ def preprocess_single_image(image_path):
 # DnCNN definition
 # -----------------------
 class DnCNN(nn.Module):
-    def __init__(self, channels=3, num_of_layers=20, features=64):
-        super(DnCNN, self).__init__()
+    def _init_(self, channels=3, num_of_layers=20, features=64):
+        super(DnCNN, self)._init_()
         layers = []
         layers.append(nn.Conv2d(channels, features, kernel_size=3, padding=1, bias=False))
         layers.append(nn.ReLU(inplace=True))
@@ -231,5 +231,5 @@ def predict():
         print("Error during prediction:", str(e))
         return jsonify({"success": False, "error": str(e)}), 500
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run(debug=True)
