@@ -8,10 +8,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 import cv2
+import torch.nn as nn
+import torch
+from torchvision import transforms
 
 # --- CONFIG: CHANGE THIS TO YOUR IMAGE PATH ---
 YOUR_IMAGE_PATH = 'testImages/2.png'
-MODEL_PATH = 'final_model.keras'
+
+##  model paths ##
+MODEL_PATH = 'modelsTrained/final_model.keras'
+MODEL_PATH_DNCNN='modelsTrained/best_dcnn.pth'
 
 # Model input dimensions
 IMG_HEIGHT = 256
@@ -69,6 +75,16 @@ class DnCNN(nn.Module):
     def forward(self, x):
         out = self.dncnn(x)
         return x - out  # Residual learning
+    
+model_dncnn = DnCNN(channels=3, num_of_layers=20)
+model_dncnn.load_state_dict(torch.load(MODEL_PATH_DNCNN, map_location="cpu"))
+model_dncnn.eval()
+transform = transforms.Compose([transforms.ToTensor()])
+
+#------------------------------------
+
+
+#####           API ROUTES STARTING NOW &&&&&&&-----------------------------
 
 @app.route("api/human_segmentation",method=["POST"])
 def humanSegment():
@@ -148,6 +164,48 @@ def humanSegment():
 
     except Exception as e:
         print("Error during processing:", str(e))
+        return jsonify({"success": False, "error": str(e)}), 500
+    
+# ------ ---- ------------------------------------
+
+
+@app.route("api/dncnn",method=["POST"])
+def dncnn():
+    if "file" not in request.files:
+        return jsonify({"error":"no file uploaded"}),400
+    file = request.files["file"]
+    if file.filename == "":
+        return jsonify({"error": "Empty filename"}), 400
+    filepath = os.path.join(UPLOAD_FOLDER,file.filename)
+    file.save(filepath)
+    try:
+        print("--- SCRIPT START ---")
+
+        # 1. Load & preprocess input image
+        noisy_img = Image.open(filepath).convert("RGB")
+        noisy_img = noisy_img.resize((128, 128))
+        noisy_tensor = transform(noisy_img).unsqueeze(0)
+
+        # 2. Run model
+        with torch.no_grad():
+            denoised_tensor = model_dncnn(noisy_tensor)
+        denoised_tensor = torch.clamp(denoised_tensor, 0, 1)
+
+        # 3. Convert back to numpy image
+        denoised_img = denoised_tensor.squeeze().permute(1, 2, 0).cpu().numpy()
+        denoised_img_bgr = (denoised_img * 255).astype(np.uint8)
+        denoised_img_bgr = cv2.cvtColor(denoised_img_bgr, cv2.COLOR_RGB2BGR)
+
+        # 4. Save output
+        output_path = os.path.join(RESULT_FOLDER, "denoised_result.png")
+        cv2.imwrite(output_path, denoised_img_bgr)
+        print("[SUCCESS] Denoised image saved to", output_path)
+
+        # 5. Return image instead of JSON
+        return send_file(output_path, mimetype="image/png")
+
+    except Exception as e:
+        print("Error during DnCNN processing:", str(e))
         return jsonify({"success": False, "error": str(e)}), 500
     
 # ------ ---- ------------------------------------
