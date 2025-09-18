@@ -49,6 +49,27 @@ def preprocess_single_image(image_path):
 
 # human segmentation end ---------------------------------------
 
+# dncnn staring -- custom implementation addition ---------------
+
+# DnCNN definition
+# -----------------------
+class DnCNN(nn.Module):
+    def __init__(self, channels=3, num_of_layers=20, features=64):
+        super(DnCNN, self).__init__()
+        layers = []
+        layers.append(nn.Conv2d(channels, features, kernel_size=3, padding=1, bias=False))
+        layers.append(nn.ReLU(inplace=True))
+        for _ in range(num_of_layers - 2):
+            layers.append(nn.Conv2d(features, features, kernel_size=3, padding=1, bias=False))
+            layers.append(nn.BatchNorm2d(features))
+            layers.append(nn.ReLU(inplace=True))
+        layers.append(nn.Conv2d(features, channels, kernel_size=3, padding=1, bias=False))
+        self.dncnn = nn.Sequential(*layers)
+
+    def forward(self, x):
+        out = self.dncnn(x)
+        return x - out  # Residual learning
+
 @app.route("api/human_segmentation",method=["POST"])
 def humanSegment():
     if "file" not in request.files:
