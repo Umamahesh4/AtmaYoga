@@ -6,7 +6,7 @@ from skimage.metrics import structural_similarity as sk_ssim
 from PIL import Image
 import torch.nn as nn
 import torch.nn.functional as F
-MODEL_PATH_DCE=''
+MODEL_PATH_DCE='dce_best.pth'
 
 # ============================================
 # Load the model
