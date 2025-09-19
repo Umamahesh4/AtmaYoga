@@ -1,68 +1,42 @@
 import torch
 import cv2
-import matplotlib.pyplot as plt
-import os
-from torchvision import transforms
+import numpy as np
+from skimage.metrics import peak_signal_noise_ratio as sk_psnr
+from skimage.metrics import structural_similarity as sk_ssim
+from PIL import Image
 import torch.nn as nn
-import torch.optim as optim
 import torch.nn.functional as F
-import matplotlib.pyplot as plt
+MODEL_PATH_DCE=''
 
-
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-class CSDN_Tem(nn.Module):
-    def __init__(self, in_ch, out_ch):
-        super(CSDN_Tem, self).__init__()
-        self.depth_conv = nn.Conv2d(
-            in_channels=in_ch,
-            out_channels=in_ch,
-            kernel_size=3,
-            stride=1,
-            padding=1,
-            groups=in_ch
-        )
-        self.point_conv = nn.Conv2d(
-            in_channels=in_ch,
-            out_channels=out_ch,
-            kernel_size=1,
-            stride=1,
-            padding=0,
-            groups=1
-        )
-
-    def forward(self, x):
-        x = self.depth_conv(x)
-        x = self.point_conv(x)
-        return x
-
-
+# ============================================
+# Load the model
+# ============================================
 class ZeroDCE(nn.Module):
-    def __init__(self, scale_factor=1):
+    # Define your ZeroDCE class here, same as you did in training
+    # (Use the same class code from your training script)
+    def __init__(self, scale_factor=1, number_f=32):
         super(ZeroDCE, self).__init__()
         self.scale_factor = scale_factor
         self.relu = nn.ReLU(inplace=True)
-        self.upsample = nn.UpsamplingBilinear2d(scale_factor=self.scale_factor)
-        number_f = 32
-
-        self.e_conv1 = CSDN_Tem(3, number_f)
-        self.e_conv2 = CSDN_Tem(number_f, number_f)
-        self.e_conv3 = CSDN_Tem(number_f, number_f)
-        self.e_conv4 = CSDN_Tem(number_f, number_f)
-        self.e_conv5 = CSDN_Tem(number_f * 2, number_f)
-        self.e_conv6 = CSDN_Tem(number_f * 2, number_f)
-        self.e_conv7 = CSDN_Tem(number_f * 2, 3)
+        self.e_conv1 = nn.Conv2d(3, number_f, 3, 1, 1, bias=True) 
+        self.e_conv2 = nn.Conv2d(number_f, number_f, 3, 1, 1, bias=True) 
+        self.e_conv3 = nn.Conv2d(number_f, number_f, 3, 1, 1, bias=True) 
+        self.e_conv4 = nn.Conv2d(number_f, number_f, 3, 1, 1, bias=True) 
+        self.e_conv5 = nn.Conv2d(number_f * 2, number_f, 3, 1, 1, bias=True) 
+        self.e_conv6 = nn.Conv2d(number_f * 2, number_f, 3, 1, 1, bias=True) 
+        self.e_conv7 = nn.Conv2d(number_f * 2, 24, 3, 1, 1, bias=True) 
 
     def enhance(self, x, x_r):
-        for _ in range(4):
-            x = x + x_r * (x ** 2 - x)
+        r_list = torch.split(x_r, 3, dim=1)
+        for i in range(8):
+            x = x + r_list[i] * (torch.pow(x, 2) - x)
         return x
 
     def forward(self, x):
-        if self.scale_factor == 1:
-            x_down = x
-        else:
+        if self.scale_factor != 1:
             x_down = F.interpolate(x, scale_factor=1/self.scale_factor, mode='bilinear', align_corners=False)
+        else:
+            x_down = x
 
         x1 = self.relu(self.e_conv1(x_down))
         x2 = self.relu(self.e_conv2(x1))
@@ -73,33 +47,63 @@ class ZeroDCE(nn.Module):
         x_r = torch.tanh(self.e_conv7(torch.cat([x1, x6], 1)))
 
         if self.scale_factor != 1:
-            x_r = self.upsample(x_r)
+            x_r = F.interpolate(x_r, size=x.shape[2:], mode='bilinear', align_corners=False)
 
-        enhanced = self.enhance(x, x_r)
-        return enhanced, x_r
+        enhanced_image = self.enhance(x, x_r)
+        return enhanced_image, x_r
+
+# Load the trained model
+def load_model(model_path, num_filters=32):
+    model = ZeroDCE(number_f=num_filters)
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
+    model.eval()
+    return model
+
+def preprocess_image(image_path, img_size=(256, 256)):
+    # Read and preprocess the input image
+    img = cv2.imread(image_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # Convert to RGB
+    img = cv2.resize(img, img_size)  # Resize to the target size
+    img_tensor = torch.tensor(img.astype(np.float32) / 255.0).permute(2, 0, 1).unsqueeze(0)  # Convert to tensor
+    return img_tensor
+
+# def show_images(input_img, enhanced_img):
+#     input_img = input_img.squeeze(0).permute(1, 2, 0).numpy()
+#     enhanced_img = enhanced_img.squeeze(0).permute(1, 2, 0).detach().numpy()
+
+#     # Plot the input and enhanced image
+#     plt.figure(figsize=(10, 5))
+#     plt.subplot(1, 2, 1)
+#     plt.imshow(input_img)
+#     plt.title("Input Image")
+#     plt.axis('off')
+
+#     plt.subplot(1, 2, 2)
+#     plt.imshow(enhanced_img)
+#     plt.title("Enhanced Image")
+#     plt.axis('off')
+
+#     plt.show()
 
 
+def run_inference(image_path):
+    # Load the model
+    model = load_model(MODEL_PATH_DCE)
 
-# load trained model
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # Preprocess the image
+    input_image = preprocess_image(image_path)
 
-# from your_model_file import ZeroDCE  # Replace with your actual file if separate
-def zerodcePredict(img_path):
-    model = ZeroDCE().to(device)
-    model.load_state_dict(torch.load("fine_tuned_zero_dce.pth", map_location=device))
-    model.eval()  # Set to evaluation mode
-
-    # Load and preprocess the image
-    img = cv2.imread(img_path)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    img_input = cv2.resize(img, (256, 256))  # Resize the image to 256x256
-    img_tensor = torch.tensor(img_input / 255.0, dtype=torch.float32).permute(2, 0, 1).unsqueeze(0).to(device)
-
+    # Run the model on the input image
     with torch.no_grad():
-        enhanced, _ = model(img_tensor)
+        enhanced_image, _ = model(input_image)
 
-    # Post-process enhanced image
-    enhanced_img = enhanced.squeeze(0).permute(1, 2, 0).cpu().numpy()
-    enhanced_img = (enhanced_img * 255).clip(0, 255).astype('uint8')
-    return enhanced_img
+    enhanced_image = enhanced_image.squeeze(0)  # Remove batch dimension
+    enhanced_image = enhanced_image.permute(1, 2, 0).numpy()  # Convert to (H, W, C)
 
+    # Convert to PIL image (if needed for saving or displaying)
+    enhanced_image_pil = Image.fromarray(np.uint8(enhanced_image * 255))  # Assuming it's in [0, 1] range
+
+    return enhanced_image_pil
+
+    # Display the results
+    #show_images(input_image, enhanced_image)

@@ -1,12 +1,7 @@
 import os
 from flask import Flask, request, jsonify,send_file
-
-
 from model import predict_image   # your model.py with predict_image()
 from zerodce import zerodcePredict
-
-
-
 from flask_cors import CORS
 import tensorflow as tf
 from tensorflow import keras
@@ -24,6 +19,8 @@ YOUR_IMAGE_PATH = 'testImages/2.png'
 ##  model paths ##
 MODEL_PATH = 'modelsTrained/final_model.keras'
 MODEL_PATH_DNCNN='modelsTrained/best_dcnn.pth'
+MODEL_PATH_GAN=''
+
 
 # Model input dimensions
 IMG_HEIGHT = 256
@@ -163,9 +160,9 @@ def humanSegment():
 
         print("[SUCCESS] Image saved to", output_path)
 
-        # -----------------------------
-        # Instead of returning JSON, send image file
-        # -----------------------------
+        
+        # instead of returning JSON, send image file
+        
         return send_file(output_path, mimetype="image/png")
 
     except Exception as e:
