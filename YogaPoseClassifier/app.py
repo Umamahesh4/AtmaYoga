@@ -1,6 +1,12 @@
 import os
 from flask import Flask, request, jsonify,send_file
+
+
 from model import predict_image   # your model.py with predict_image()
+from zerodce import zerodcePredict
+
+
+
 from flask_cors import CORS
 import tensorflow as tf
 from tensorflow import keras
@@ -24,7 +30,7 @@ IMG_HEIGHT = 256
 IMG_WIDTH = 256
 
 
-app = Flask(_name_)
+app = Flask(__name__)
 
 # Allow React frontend to call the API
 CORS(app, origins=["http://localhost:5173"])
@@ -211,6 +217,48 @@ def dncnn():
 # ------ ---- ------------------------------------
 
 
+@app.route("api/zeroDCE_adjust",method=["POST"])
+def zeroDCE_adjust():
+    if "file" not in request.files:
+        return jsonify({"error":"no file uploaded"}),400
+    file = request.files["file"]
+    if file.filename == "":
+        return jsonify({"error": "Empty filename"}), 400
+    filepath = os.path.join(UPLOAD_FOLDER,file.filename)
+    file.save(filepath)
+    try:
+        print("--- SCRIPT START ---")
+
+        # # 1. Load & preprocess input image
+        # noisy_img = Image.open(filepath).convert("RGB")
+        # noisy_img = noisy_img.resize((128, 128))
+        # noisy_tensor = transform(noisy_img).unsqueeze(0)
+
+        # # 2. Run model
+        # with torch.no_grad():
+        #     denoised_tensor = model_dncnn(noisy_tensor)
+        # denoised_tensor = torch.clamp(denoised_tensor, 0, 1)
+
+        # # 3. Convert back to numpy image
+        # denoised_img = denoised_tensor.squeeze().permute(1, 2, 0).cpu().numpy()
+        # denoised_img_bgr = (denoised_img * 255).astype(np.uint8)
+        # denoised_img_bgr = cv2.cvtColor(denoised_img_bgr, cv2.COLOR_RGB2BGR)
+        outputImage = zerodcePredict(filepath)
+        # 4. Save output
+        output_path = os.path.join(RESULT_FOLDER, "dce_light_adjust.png")
+        cv2.imwrite(output_path, outputImage)
+        print("[SUCCESS] Denoised image saved to", output_path)
+
+        # 5. Return image instead of JSON
+        return send_file(output_path, mimetype="image/png")
+
+    except Exception as e:
+        print("Error during DnCNN processing:", str(e))
+        return jsonify({"success": False, "error": str(e)}), 500
+    
+# ------ ---- ------------------------------------
+
+
 
 @app.route("/api/predict", methods=["POST"])
 def predict():
@@ -231,5 +279,5 @@ def predict():
         print("Error during prediction:", str(e))
         return jsonify({"success": False, "error": str(e)}), 500
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     app.run(debug=True)
